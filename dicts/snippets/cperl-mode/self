@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: self
+# key: self
+# binding: direct-keybinding
+# --
+my $self = shift;

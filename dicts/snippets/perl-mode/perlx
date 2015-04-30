@@ -1,0 +1,67 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: perlx
+# key: perlx
+# binding: direct-keybinding
+# --
+#!/usr/bin/perl -w
+
+=head1 NAME
+
+`(file-name-nondirectory (buffer-file-name))` - ${Script for ...}
+
+=head1 SYNOPSIS
+
+  `(file-name-nondirectory (buffer-file-name))` [ --help | --manual] [options]
+
+  Help Options:
+   --help     Show this scripts help information.
+   --manual   Read this scripts manual.
+
+=cut
+
+=head1 OPTIONS
+
+=over 8
+
+=item B<--help>
+
+Show the brief help information.
+
+=item B<--manual>
+
+Read the manual.
+
+=back
+
+=head1 AUTHOR
+
+
+ Username
+ --
+ http://github.com/youtgit/
+
+=cut
+
+use warnings;
+use strict;
+
+use Getopt::Long;
+use Pod::Usage;
+
+# prevent Wide character warning
+binmode(STDOUT,':utf8');
+
+# ------------------------------------------------------
+# commandline options
+my $HELP = 0;
+my $MANUAL = 0;
+
+GetOptions(
+    "help"      => \\$HELP,
+    "manual"    => \\$MANUAL,
+);
+# ------------------------------------------------------
+
+pod2usage(-verbose => 2) && exit if $MANUAL;
+pod2usage(1) && exit if $HELP;
+
