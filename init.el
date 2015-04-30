@@ -16,6 +16,7 @@
  (load "~/emacs/rc/core-fonts.el"))
 
 (load "~/emacs/rc/ac-autocomplete.el")
+(load "~/emacs/rc/company-completion.el")
 (load "~/emacs/rc/helm.el")
 
 (load "~/emacs/rc/assoc.el")
