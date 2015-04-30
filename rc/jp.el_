@@ -1,0 +1,242 @@
+;; navi2ch
+(setq load-path (cons  "~/emacs/navi2ch" load-path))
+(require 'navi2ch)
+
+;; skk
+(setq load-path (cons  "~/emacs/skk" load-path)) 
+
+;;; skk
+(setq Info-default-directory-list
+      (cons (expand-file-name "~/emacs/info/") Info-default-directory-list ))
+(setq Info-default-directory-list
+      (cons (expand-file-name "~/emacs/ssk/info/") Info-default-directory-list ))
+
+;; (require 'skk-autoloads)
+;; (global-set-key "\C-x\C-j" 'skk-mode)
+;; (global-set-key "\C-xj" 'skk-auto-fill-mode)
+;; (setq skk-use-jisx0201-input-method t
+;;       skk-inline-show-face
+;;       '(:foreground "white" :background "gray30")
+;;       skk-dcomp-activate t
+;;       skk-dcomp-multiple-activate t
+;;       skk-dcomp-multiple-rows 10
+;;       skk-egg-like-newline t
+;;       skk-use-look t ; 英語補完
+;;       skk-show-candidates-always-pop-to-buffer t ; 変換候補の表示位置
+;;       skk-show-annotation t ; annotation
+
+;;       ;; skk-japanese-message-and-error t
+;;       ;; skk-auto-insert-paren t;
+;       ;; skk-check-okurigana-on-touroku t
+;;       ;; skk-show-inline 'vertical
+;;       ;; skk-show-japanese-menu nil
+;;       ;; skk-number-style nil
+;;       ;; skk-show-annotation t
+;;       ;; skk-use-look t
+;;       ;; skk-look-recursive-search t
+;;       ;;	skk-henkan-strict-okuri-precedence t
+;;       skk-server-host "localhost"
+;;       skk-server-portnum 1178)
+
+
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;; https://bitbucket.org/sakito/dot.emacs.d/src/cea01a7d527b/site-start.d/init_skk.el
+;; ;; ddskkでは不要です
+;; ;; @see http://openlab.ring.gr.jp/skk/index-j.html
+;; ;;
+;; ;; 色設定
+;; (setq skk-cursor-hiragana-color "hot pink")
+;; (require 'skk-autoloads)
+;; (setq skk-preload t)
+
+;; ;; C-\ でも SKK に切り替えられるように設定
+;; (setq default-input-method "japanese-skk")
+
+;; 					(global-set-key "\C-x\C-j" 'skk-mode)
+;; 					;(global-set-key "\C-xj" 'skk-auto-fill-mode)
+;; 					;(global-set-key "\C-xt" 'skk-tutorial)
+;; 					;(setq skk-large-jisyo "/usr/local/share/skk/SKK-JISYO.L")
+;; 					;(setq skk-number-style 0)
+;; 					;(setq date-ad 1)
+
+;; (skk-mode)
+
+;; (setq skk-server-host "localhost")
+;; (setq skk-server-portnum 1178)
+;; 					;(setq skk-jisyo-code 'utf-8-unix)
+
+;; ;;"「"を入力したら"」"も自動で挿入
+;; ;; (setq skk-auto-insert-paren t)
+
+;; (setq skk-rom-kana-rule-list
+;;       (append skk-rom-kana-rule-list
+;;               '(("@" nil "@"))))
+
+;; ;; 送り仮名が厳密に正しい候補を優先して表示
+;; (setq skk-henkan-strict-okuri-precedence t)
+
+;; ;;漢字登録時、送り仮名が厳密に正しいかをチェック
+;; (setq skk-check-okurigana-on-touroku t)
+
+;; ;; 変換候補をインラインに表示
+;; (setq skk-show-inline t)
+;; ;; 縦に表示したい場合以下を設定
+;; (setq skk-show-inline 'vertical)
+
+;; ;; isearch時にSKKをオフ
+;; (setq skk-isearch-start-mode 'latin)
+
+;; ;; カーソル付近に mode-string を表示(14.4 から)
+;; ;; popwin と同時利用したりすると動作が変な気がするので停止
+;; ;;(setq skk-show-mode-show t)
+;; ;;(setq skk-show-mode-style 'tooltip)
+
+;; ;; C-x C-fでファイルを開くとSKK
+;; (add-hook 'find-file-hooks
+;;           (lambda ()
+;;             (skk-latin-mode t)
+;;             ))
+
+;; (add-hook 'skk-load-hook
+;;           (lambda ()
+;;             (require 'context-skk)
+;;             (add-to-list 'context-skk-programming-mode 'scala-mode)
+;;             ))
+
+;; (defadvice skk-latin-mode (after no-latin-mode-in-lisp-interaction activate)
+;;   "`lisp-interaction-mode' において英数モードを回避する。"
+;;   (when (eq major-mode 'lisp-interaction-mode)
+;;     (skk-mode-off)))
+
+;; ;; pos-tip が有効な時だけ以下の設定を実施
+;; (when (require 'pos-tip nil t)
+;;   ;; 変換時に注釈 (annotation) を表示する
+;;   (setq skk-show-annotation t)
+;;   ;; 変換候補一覧と注釈 (annotation) を tooltip で表示
+;;   (setq skk-show-tooltip t)
+;;   ;; Tip 描画に pos-tip を利用
+;;   (setq skk-tooltip-function
+;;         #'(lambda (tooltip-str)
+;;             (pos-tip-show tooltip-str nil nil nil 0)))
+
+;;   ;; Tooltip 表示位置の調整
+;;   ;; (setq skk-tooltip-x-offset 3)
+;;   ;; (setq skk-tooltip-y-offset 10)
+;;   ;;(require 'popup)
+;;   (when skk-show-tooltip
+;;     ;; tooltip のルックスを指定する。デフォルトでは Emacs 標準のルックスになる
+;;     (setq skk-tooltip-parameters
+;;           '((background-color . "dim gray")
+;;             (border-color . "dim gray"))))
+;;   )
+
+;; (require 'skk-hint) ; ヒント
+;; (add-hook 'skk-load-hook ; 自動的に入力モードを切り替え
+;; 	  (lambda ()
+;; 		(require 'context-skk)))
+
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (require 'skk-mazegaki)
+;; (setq skk-rom-kana-rule-list
+;;           (append skk-rom-kana-rule-list
+;;                  '(("fj" nil skk-mazegaki-henkan))))
+;; (setq skk-rule-tree
+;;       (skk-compile-rule-list
+;;        skk-rom-kana-base-rule-list skk-rom-kana-rule-list))
+
+(require 'skk-kakasi)
+;; (setq skk-large-jisyo "~/emacs/skk/data/SKK-JISYO.L")
+
+;; lookup
+(setq load-path (cons "~/emacs/lookup/lisp/lookup" load-path))
+
+(define-key ctl-x-map "l" 'lookup)
+(define-key ctl-x-map "y" 'lookup-region)
+(define-key ctl-x-map "\C-y" 'lookup-pattern)
+(load "lookup-autoloads")
+
+(setq Info-default-directory-list
+      (cons (expand-file-name "~/emacs/info/") Info-default-directory-list ))
+(setq Info-default-directory-list
+      (cons (expand-file-name "~/emacs/ssk/info/") Info-default-directory-list ))
+
+(if (string-equal system-name "pluto.homeworld")
+    (setq lookup-search-agents
+	  '((ndeb "~/dict/yarxi/")
+	    (ndeb "~/dict/warodai/")
+	    (ndeb "~/dict/jiten/")
+	    (ndeb "~/dict/kojien5/")
+	    (ndeb "~/dict/super/")
+	    (ndeb "~/dict/meikyojj/")
+	    (ndeb "~/dict/daijirin/")
+	    (ndeb "~/dict/meikagami/")
+	    (ndeb "~/dict/1997/"))))
+
+(setq ndeb-binary-programs
+      '((wave "mplayer") ;; fuck, nhk jiten have bad wave format for intern play-sound-file
+        (mpeg "mplayer" "−af" "volnorm")))
+
+(if (string-equal system-name "ubuntu-desktop")
+    (setq lookup-search-agents
+	  '((ndeb "~/Desktop/work/YARXI")
+	    (ndeb "/mnt/olexandr/torrent/epw/warodai_ebwing")
+	    (ndeb "/mnt/olexandr/torrent/epw/Eiwaei/Eijiro")
+	    (ndeb "/mnt/olexandr/torrent/epw/Eiwaei/Eiwachu" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Eiwaei/Genius" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Eiwaei/Kanjidic" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Eiwaei/Kenkyusha_Eiwa_Daijiten_V6" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Eiwaei/Kenkyusha_Waei_Daijiten_V5" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Eiwaei/Readers" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Eiwaei/Royal" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Eiwaei/Saitou" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Kokugo/Daijirin" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Kokugo/Daijisen" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Kokugo/Kojien" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Kokugo/Meikyou" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Kokugo/Shinjirin" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Kokugo/Shinmeikai" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Kokugo_misc/Hyobun" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Kokugo_misc/Kotowaza_kogo" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Kokugo_misc/Ruigigo" )
+	    (ndeb "/mnt/olexandr/torrent/epw/Kokugo_misc/Tegami" ))))
+
+(if (string-equal system-name "ubuntu-desktop-home")
+    (setq lookup-search-agents
+	  '( (ndeb "/mnt/d/epw/YARXI")
+	     (ndeb "/mnt/d/epw/warodai_ebwing")
+	     (ndeb "/mnt/d/epw/NHKACT")
+	     (ndeb "/mnt/d/epw/Eiwaei/Eijiro")
+	     (ndeb "/mnt/d/epw/Eiwaei/Eiwachu" )
+	     (ndeb "/mnt/d/epw/Eiwaei/Genius" )
+	     (ndeb "/mnt/d/epw/Eiwaei/Kanjidic" )
+	     (ndeb "/mnt/d/epw/Eiwaei/Kenkyusha_Eiwa_Daijiten_V6" )
+	     (ndeb "/mnt/d/epw/Eiwaei/Kenkyusha_Waei_Daijiten_V5" )
+	     (ndeb "/mnt/d/epw/Eiwaei/Readers" )
+	     (ndeb "/mnt/d/epw/Eiwaei/Royal" )
+	     (ndeb "/mnt/d/epw/Eiwaei/Saitou" )
+	     ;; (ndeb "/mnt/d/epw/Kokugo/Daijirin" )
+	     ;; (ndeb "/mnt/d/epw/Kokugo/Daijisen" )
+	     ;; (ndeb "/mnt/d/epw/Kokugo/Kojien" )
+	     ;; (ndeb "/mnt/d/epw/Kokugo/Meikyou" )
+	     ;; (ndeb "/mnt/d/epw/Kokugo/Shinjirin" )
+	     ;; (ndeb "/mnt/d/epw/Kokugo/Shinmeikai" )
+	     (ndeb "/mnt/d/epw/Kokugo_misc/Hyobun" )
+	     (ndeb "/mnt/d/epw/Kokugo_misc/Kotowaza_kogo" )
+	     (ndeb "/mnt/d/epw/Kokugo_misc/Ruigigo" )
+	     (ndeb "/mnt/d/epw/Kokugo_misc/Tegami" ))))
+
+(setq ndeb-sound-caption-format "♫《%s》")
+
+(defun my-lookup-hook ()
+  (local-set-key (kbd "M-p") (function
+			      (lambda nil (interactive)
+				(lookup-summary-content-window)
+				(search-forward "♫《")
+				(ndeb-binary-follow-link))))
+  (local-set-key (kbd "b") 'lookup-previous-history)
+  ;; vi navigation
+  (local-set-key (kbd "j") 'lookup-summary-scroll-up-content)
+  (local-set-key (kbd "k") 'lookup-summary-scroll-down-content))
+(add-hook 'lookup-summary-mode-hook 'my-lookup-hook)
+(add-hook 'lookup-content-mode-hook 'my-lookup-hook)
