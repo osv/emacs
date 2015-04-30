@@ -1,3 +1,9 @@
+;; Make sure all these files is in ~/emacs folder
+;;
+;; Add to you ~/.emacs.el
+;; (load "~/emacs/init.el")
+
+
 (add-to-list 'load-path "~/emacs/external")
 
 (load "~/emacs/rc/core-packages.el")
