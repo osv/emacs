@@ -54,9 +54,11 @@
 ;; install: npm install -g tern
 (add-hook 'js2-mode-hook
             (lambda ()
+              (tern-mode t)
               (set (make-local-variable 'company-backends) '(company-tern company-files company-yasnippet))))
 (define-key js2-mode-map (kbd "M-SPC") 'company-tern)
-
+(define-key js2-mode-map (kbd "C-c j") 'tern-find-definition)
+tern-find-definition
 ;; C-c C-r - refactor
 
 ;;(setq ac-js2-evaluate-calls t)
