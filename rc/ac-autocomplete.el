@@ -1,6 +1,5 @@
 (require 'auto-complete-config)
-(ac-config-default)
-
+;; (ac-config-default)
 ;; (global-auto-complete-mode t)
 
 (setq ac-use-menu-map t        ; Move selective candidates by [C-n] / [C-p]
