@@ -3,22 +3,28 @@
 
 (require 'web-beautify)
 
+(add-to-list 'load-path "~/work/github/company-html")
+
 ;; some complex web mode
 (require 'web-mode)
 
-(require 'ac-html)
-(require 'ac-jade)
-(require 'ac-haml)
-(require 'ac-slim)
+(require 'company-web)
+(require 'company-web-html)
+(require 'company-web-jade)
+(require 'company-web-slim)
+
+;; extend company-web
 (require 'ac-html-bootstrap)
 (require 'ac-html-csswatcher)
-
 (ac-html-csswatcher-setup)
 
-(add-hook 'jade-mode-hook 'ac-jade-enable)
-(add-hook 'haml-mode-hook 'ac-haml-enable)
-(add-hook 'html-mode-hook 'ac-html-enable)
-(add-hook 'slim-mode-hook 'ac-slim-enable)
+;; hooks for jade&slim, activate company
+(add-hook 'jade-mode-hook (lambda ()
+                              (set (make-local-variable 'company-backends) '(company-web-jade company-files))))
+
+(add-hook 'slim-mode-hook (lambda ()
+                              (set (make-local-variable 'company-backends) '(company-web-slim company-files))))
+
 
 ;; extend web mode
 
@@ -80,8 +86,6 @@
                ))))
 (put 'web-mode 'flyspell-mode-predicate 'web-mode-flyspefll-verify)
 
-(require 'tern-auto-complete)
-
 (defun my-web-mode-hook ()
   "Hook for Web mode."
   (setq web-mode-markup-indent-offset 2)
@@ -91,7 +95,6 @@
         '(("css" . (
                     ac-source-css-property
                     ac-source-dictionary
-                    ;; ac-source-emmet-css-snippets
                     ac-source-words-in-same-mode-buffers
                   ))
           ("html" . (
@@ -100,27 +103,14 @@
                      ac-source-html-tag
                      ac-source-html-attribute
 		     ac-source-filename
-                     ;; ac-source-dictionary
-                     ;; ac-source-abbrev
-                     ;; ac-source-gtags
-		     ;; ac-source-emmet-html-aliases ac-source-emmet-html-snippets
-                     ;; ac-source-words-in-same-mode-buffers
                      ac-source-yasnippet
                      ))
           ("jsx" . (
                      ac-source-tern-completion))
           ("javascript" . (
                      ac-source-tern-completion))))
-  (set (make-local-variable 'company-backends) '(company-css company-files))
-  (setq web-mode-enable-auto-quoting nil)
-  (auto-complete-mode 1)
-  ;; (lambda ()
-  ;;   (when (equal web-mode-content-type "javascript")
-  ;;     ;; enable flycheck
-  ;;     (flycheck-select-checker 'my-javascript-jshint)
-  ;;     (flycheck-mode)))
-  (auto-complete-mode t)
-  (tern-mode t))
+  (set (make-local-variable 'company-backends) '(company-web-html company-files))
+  (setq web-mode-enable-auto-quoting nil))
 
 ;; maybe in future add this
 ;; (add-to-list 'web-mode-ac-sources-alist '("html" . (ac-source-jquery-event-dict ac-source-jquery-callback-dict ac-source-jquery-deferred-dict ac-source-jquery-selector-dict)))
@@ -128,92 +118,15 @@
 (add-hook 'web-mode-hook 'my-web-mode-hook)
 
 
-;; manual autocomplete
-(define-key web-mode-map (kbd "M-SPC") 'tern-ac-complete)
+;; manual js autocomplete
+(define-key web-mode-map (kbd "M-SPC") 'company-web-html)
 
-
-;; other face customize
-
-;; (setq ac-source-haml-tag
-;;       (append
-;;        '(
-;;          (candidate-face . ac-html-tag-face)
-;;          (selection-face . ac-my-selection-face)
-;;          (requires . 0)
-;;          ) ac-source-haml-tag))
-
-;; (setq ac-source-haml-attribute
-;;       (append
-;;        '(
-;;          (candidate-face . ac-html-attribute-face)
-;;          (selection-face . ac-my-selection-face)
-;;          (requires . 0)
-;;          ) ac-source-haml-attribute))
-
-;; (setq ac-source-haml-attribute-value
-;;       (append
-;;        '(
-;;          (candidate-face . ac-html-selection-face)
-;;          (selection-face . ac-my-selection-face)
-;;          (requires . 0)
-;;          ) ac-source-haml-attribute-value))
-
-;; (setq ac-source-jade-tag
-;;       (append
-;;        '(
-;;          (candidate-face . ac-html-tag-face)
-;;          (selection-face . ac-my-selection-face)
-;;          (requires . 0)
-;;          ) ac-source-jade-tag))
-
-;; (setq ac-source-jade-attribute
-;;       (append
-;;        '(
-;;          (candidate-face . ac-html-attribute-face)
-;;          (selection-face . ac-my-selection-face)
-;;          (requires . 0)
-;;          ) ac-source-jade-attribute))
-
-;; (setq ac-source-jade-attribute-value
-;;       (append
-;;        '(
-;;          (candidate-face . ac-html-selection-face)
-;;          (selection-face . ac-my-selection-face)
-;;          (requires . 0)
-;;          ) ac-source-jade-attribute-value))
-
-
-
-;; (setq ac-source-slim-tag
-;;       (append
-;;        '(
-;;          (candidate-face . ac-html-tag-face)
-;;          (selection-face . ac-my-selection-face)
-;;          (requires . 0)
-;;          ) ac-source-slim-tag))
-
-;; (setq ac-source-slim-attribute
-;;       (append
-;;        '(
-;;          (candidate-face . ac-html-attribute-face)
-;;          (selection-face . ac-my-selection-face)
-;;          (requires . 0)
-;;          ) ac-source-slim-attribute))
-
-;; (setq ac-source-slim-attribute-value
-;;       (append
-;;        '(
-;;          (candidate-face . ac-html-selection-face)
-;;          (selection-face . ac-my-selection-face)
-;;          (requires . 0)
-;;          ) ac-source-slim-attribute-value))
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CSS
 
 (add-hook  'css-mode-hook
            (lambda ()
-             (rainbow-mode +1)
-             (auto-complete-mode t)))
+             (rainbow-mode +1)))
 
 (css-eldoc-enable)
 
