@@ -18,6 +18,7 @@
     apache-mode
     company-web
     web-completion-data
+    emmet-mode
     ace-jump-mode
     ace-jump-helm-line
     ace-window ;; required by
