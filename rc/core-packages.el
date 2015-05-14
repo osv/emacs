@@ -15,10 +15,14 @@
     ac-html
     ac-html-bootstrap
     ac-html-csswatcher
+    apache-mode
+    company-web
+    web-completion-data
     ace-jump-mode
     ace-jump-helm-line
     ace-window ;; required by
     anything
+    angular-snippets
 ;;    ace-isearch
     anzu
     apel
@@ -52,6 +56,7 @@
     git-gutter
     haskell-mode
     helm
+    helm-company
     helm-css-scss
     helm-flycheck
     helm-google
