@@ -3,7 +3,9 @@
 
 (require 'web-beautify)
 
-(add-to-list 'load-path "~/work/github/company-html")
+;;(add-to-list 'load-path "~/work/github/ac-html-bootstrap")
+;; (add-to-list 'load-path "~/work/github/web-completion-data")
+;; (add-to-list 'load-path "~/work/github/company-html")
 
 ;; some complex web mode
 (require 'web-mode)
@@ -16,7 +18,7 @@
 ;; extend company-web
 (require 'ac-html-bootstrap)
 (require 'ac-html-csswatcher)
-(ac-html-csswatcher-setup)
+(company-web-csswatcher-setup)
 
 ;; hooks for jade&slim, activate company
 (add-hook 'jade-mode-hook (lambda ()
@@ -98,18 +100,13 @@
                     ac-source-words-in-same-mode-buffers
                   ))
           ("html" . (
-                     ac-source-tern-completion
 		     ac-source-html-attribute-value
                      ac-source-html-tag
                      ac-source-html-attribute
 		     ac-source-filename
                      ac-source-yasnippet
-                     ))
-          ("jsx" . (
-                     ac-source-tern-completion))
-          ("javascript" . (
-                     ac-source-tern-completion))))
-  (set (make-local-variable 'company-backends) '(company-web-html company-files))
+                     ))))
+  (set (make-local-variable 'company-backends) '(company-web-html company-yasnippet company-files))
   (setq web-mode-enable-auto-quoting nil))
 
 ;; maybe in future add this
