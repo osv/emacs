@@ -40,6 +40,8 @@
 (setq pde-extra-setting nil)
 (load "pde-load")
 
+(setq cperl-electric-parens-string "<")
+
 ;; (global-set-key (kbd "M-'") 'just-one-space)
 ;; (global-set-key (kbd "C-M-=") 'pde-indent-dwim)
 ;; ;; nearest key to dabbrev-expand

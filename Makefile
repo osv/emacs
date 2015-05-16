@@ -40,4 +40,4 @@ cpan-perlcompletion:
 	${CPAN_INSTALL} Class::Inspector
 
 cpan-dev:
-	${CPAN_INSTALL} Perl::Critic
+	${CPAN_INSTALL} Perl::Critic Perl::Tidy
