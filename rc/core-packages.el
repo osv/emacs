@@ -46,6 +46,7 @@
     discover-js2-refactor
     dockerfile-mode
     egg
+    expand-region
     feature-mode
     flim
     flx
