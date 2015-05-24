@@ -13,8 +13,6 @@
       browse-url-firefox-new-window-is-tab t)
 
 (setq highlight-current-line-on t)
-;;(set-face-background 'highlight-current-line-face "#3f3f2b") 
-(load "~/emacs/pmade/emacs.d/pmade-colors.el")
 ;;(load-file "~/emacs/rc-cedet.el")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

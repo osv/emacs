@@ -33,3 +33,7 @@
 
 (load "~/emacs/rc/jabber.el")
 (load "~/emacs/rc/perlgods.el")
+
+(load "~/emacs/rc/orgmode.el")
+
+(load "~/emacs/pmade/emacs.d/pmade-colors.el")
