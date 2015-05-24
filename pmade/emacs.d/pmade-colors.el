@@ -70,6 +70,9 @@
    '(pmade-org-next-face ((t (:background "#4f97e9" :foreground "white" :box (:line-width 1 :style released-button)))))
    '(pmade-org-pending-face ((t (:background "#d85b00" :foreground "white" :box (:line-width 1 :style released-button)))))
    '(pmade-org-reading-face ((t (:background "#68527a" :foreground "white" :box (:line-width 1 :style released-button)))))
+   '(org-block-begin-line  ((t (:underline "#A7A6AA" :foreground "#00AEF1" :background "#333"))))
+   '(org-block-background  ((t (:background "#222"))))
+   '(org-block-end-line  ((t (:overline "#A7A6AA" :foreground "#00AEF1" :background "#333"))))
 
    ;; Muse Mode
    '(muse-header-1 ((t (:foreground "#D6B163" :height 1.5 :inherit variable-pitch))))
