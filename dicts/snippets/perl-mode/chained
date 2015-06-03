@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: chained
+# key: chained
+# binding: direct-keybinding
+# --
+sub ${1:function} :Chained(${2:base}) :PathPart('${3:}') :Args(${4:0}) {
+    my ( $self, $c$0 ) = @_;
+}

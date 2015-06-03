@@ -1,0 +1,10 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: =head2
+# key: =head2
+# binding: direct-keybinding
+# --
+=head2 ${1:function}
+
+$0
+
+=cut
