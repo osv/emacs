@@ -14,7 +14,7 @@ all: apt node cpan tern
 apt:
 	sudo apt-get install nodejs perl-doc
 node:
-	sudo npm install -g jshint tern csslint js-beautify
+	sudo npm install -g jshint jsonlint tern csslint js-beautify
 
 tern:
 	curl https://raw.githubusercontent.com/Slava/tern-meteor/master/meteor.js > /tmp/meteor.js
