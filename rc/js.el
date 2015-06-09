@@ -46,6 +46,9 @@
 (add-hook 'js2-mode-hook
           (lambda () (flycheck-mode t)))
 
+(add-hook 'json-mode-hook
+          (lambda () (flycheck-mode t)))
+
 ;; better use tern
 ;; ;; M-/ complete
 ;; ;; M-. goto definition
