@@ -70,6 +70,8 @@
     js2-mode
     js-doc
     js2-refactor
+    json-mode
+    json-reformat
     lua-mode
     minimap
     multiple-cursors
@@ -110,6 +112,25 @@
     )
   "A list of packages to ensure are installed at launch.")
 
+(defvar my--ignore-list
+  '(
+    json-snatcher
+    let-alist
+    log4e
+    makey
+    merlin
+    pkg-info
+    sws-mode
+    dash-functional
+    avy
+    alert
+    f
+    s
+    epl
+    gntp
+    )
+  "Don't show next packages in not bundled. They installed as dependence")
+
 (defun my--packages-installed-p ()
   "Check if all packages in `my--packages' are installed."
   (every #'package-installed-p my--packages))
@@ -148,4 +169,4 @@ are installed and are not in `my--packages'. Useful for
 removing unwanted packages."
   (interactive)
   (package-show-package-list
-   (set-difference package-activated-list my--packages)))
+   (set-difference package-activated-list (append my--packages my--ignore-list))))
