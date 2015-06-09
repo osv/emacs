@@ -58,6 +58,8 @@
               (set (make-local-variable 'company-backends) '(company-tern company-files company-yasnippet))))
 (define-key js2-mode-map (kbd "M-SPC") 'company-tern)
 (define-key js2-mode-map (kbd "C-c j") 'tern-find-definition)
+(define-key js2-mode-map (kbd "C-c t") 'web-beautify-js)
+(define-key json-mode-map (kbd "C-c t") 'json-reformat-region)
 ;; C-c C-r - refactor
 
 ;;(setq ac-js2-evaluate-calls t)
