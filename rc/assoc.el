@@ -5,6 +5,7 @@
 	("mplayer" "\\.mp3$")
 	("mplayer" "\\.ogg$")
 	("mplayer" "\\.avi$")
+	("mplayer" "\\.mp4$")
 	("vlc" "\\.wmv$")
 	("vlc" "\\.wkv$")
 	("vlc" "\\.mov$")
