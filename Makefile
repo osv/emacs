@@ -1,11 +1,26 @@
-TERN_PLUG_DIR=/usr/lib/node_modules/tern/plugin
+CHECK_NPM_BIN_PROFILE = $(shell grep 'HOME/npm/bin' ~/.profile)
+NPM_GLOBAL_PATH       = $(HOME)/npm
+TERN_PLUG_DIR         = $(NPM_GLOBAL_PATH)/lib/node_modules/tern/plugin
+
+define PROFILE_NPM
+
+# Autogenerate by ~/emacs/Makefile at "$(shell date)"
+if [ -d "$$HOME/npm/bin" ] ; then
+    PATH="$$PATH:$(NPM_GLOBAL_PATH)/bin"
+fi
+# end generete part
+endef
+
+export PROFILE_NPM
 
 help:
 	@echo "Bootstrap Emacs environment"
 	@echo "Usage:"
-	@echo "     sudo make all"
+	@echo "     make all"
 	@echo "or"
-	@echo "     sudo make apt node cpan tern"
+	@echo "     make apt node cpan tern"
+	@echo
+	@echo "Note: NPM prefix will be $(NPM_GLOBAL_PATH)"
 
 all: apt node cpan tern
 
@@ -13,12 +28,23 @@ all: apt node cpan tern
 
 apt:
 	sudo apt-get install nodejs perl-doc
-node:
-	sudo npm install -g jshint jsonlint tern csslint js-beautify
+node: node-setup
+	npm install -g jshint jsonlint tern csslint js-beautify
 
+node-setup:
+ifeq ($(CHECK_NPM_BIN_PROFILE),)
+	@echo "********************************************"
+	@echo "I setup NPM prefix to: $(NPM_GLOBAL_PATH)"
+	@echo "********************************************"
+	mkdir -p $(NPM_GLOBAL_PATH)
+	npm config set prefix $(NPM_GLOBAL_PATH)
+	echo "$$PROFILE_NPM" >> ~/.profile
+	@echo "You need relogin to apply ~/.profile changes globally"
+endif
+	@echo "npm setup done"
 tern:
 	curl https://raw.githubusercontent.com/Slava/tern-meteor/master/meteor.js > /tmp/meteor.js
-	sudo cp /tmp/meteor.js ${TERN_PLUG_DIR}
+	cp /tmp/meteor.js ${TERN_PLUG_DIR}
 
 cpan: cpan-pde cpan-csswatcher cpan-ack cpan-perlcompletion cpan-dev
 
