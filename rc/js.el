@@ -8,6 +8,7 @@
 
 (require 'discover-js2-refactor)
 (require 'js2-mode)
+(require 'json-mode)
 (require 'tern)
 ;JS settings start
 
