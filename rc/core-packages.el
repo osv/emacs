@@ -35,6 +35,7 @@
     coffee-mode
     company
     company-tern
+    company-statistics
     css-eldoc
     dash
     diminish
