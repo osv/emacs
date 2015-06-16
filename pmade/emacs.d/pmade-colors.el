@@ -15,7 +15,7 @@
    '(text-cursor ((t (:background "yellow" :foreground "black"))))
    '(cursor ((t (:background "yellow"))))
 ;;   '(match ((t :background "red")))
-    '(match ((t (:background "blue" :foreground "white" :box (:line-width 1 :color "deep sky blue")))))
+    '(match ((t (:background "blue" :foreground "white"))))
    ;;'(completion-first-difference ((t :background "DarkRed")))
    '(completions-first-difference ((t ( :background "DarkRed"))))
    '(region ((t :background "#505C74")))
