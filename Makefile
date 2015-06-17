@@ -1,5 +1,5 @@
 NODE_VERSION          = v0.12.4
-CHECK_NPM_BIN_PROFILE = $(shell grep 'HOME/npm/bin' ~/.profile)
+CHECK_PROFILE_EXTRA   = $(shell grep 'HOME/.profile-extra' ~/.profile)
 NPM_GLOBAL_PATH       = $(HOME)/npm
 TERN_PLUG_DIR         = $(NPM_GLOBAL_PATH)/lib/node_modules/tern/plugin
 # 86 or 64
@@ -11,17 +11,32 @@ endif
 NODE_URL              = http://nodejs.org/dist/$(NODE_VERSION)/node-$(NODE_VERSION)-linux-x$(ARCH).tar.gz
 
 # next heredoc will be included to .profile
-define PROFILE_NPM
+define PROFILE_INLUDE
 
 # Autogenerate by ~/emacs/Makefile at "$(shell date)"
-if [ -d "$$HOME/npm/bin" ] ; then
-    PATH="$(NPM_GLOBAL_PATH)/bin:$$PATH"
-    NODE_PATH="$(NPM_GLOBAL_PATH)/lib/node_modules:$$NODE_PATH"
+# additional setup, like PATH for node, less colorize
+if [ -d "$$HOME/.profile-extra" ] ; then
+    . "$$HOME/.profile-extra"
 fi
 # end generete part
 endef
 
-export PROFILE_NPM
+export PROFILE_INLUDE
+
+# heredoc content of ~/.profile-extra
+define PROFILE_EXTRA
+#!/bin/bash
+#Setup env
+  if [ -d "$(NPM_GLOBAL_PATH)/bin" ] ; then
+      PATH="$(NPM_GLOBAL_PATH)/bin:$$PATH"
+      NODE_PATH="$(NPM_GLOBAL_PATH)/lib/node_modules:$$NODE_PATH"
+  fi
+
+  export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+  export LESS=' -R '
+endef
+
+export PROFILE_EXTRA
 
 PATH:= "$(NPM_GLOBAL_PATH)/bin:$(PATH)"
 NODE_PATH:= "$(NPM_GLOBAL_PATH)/lib/node_modules:$(NODE_PATH)"
@@ -35,12 +50,12 @@ help:
 	@echo
 	@echo "Note: NPM prefix will be $(NPM_GLOBAL_PATH)"
 	echo $(ARCH)
-all: apt node cpan tern
+all: setup-profile apt node node-extra cpan tern
 
 # main targers
 
 apt:
-	sudo apt-get install perl-doc
+	sudo apt-get install perl-doc source-highlight
 
 node: node-install node-setup
 	npm install -g jshint jsonlint tern csslint js-beautify
@@ -52,6 +67,12 @@ node-install:
 	@echo "********************************************"
 	curl $(NODE_URL) -s -o - | tar xzf - -C $(NPM_GLOBAL_PATH)
 
+setup-profile:
+	echo "$$PROFILE_EXTRA" > ~/.profile-extra
+ifeq ($(CHECK_PROFILE_EXTRA),)
+	echo "$$PROFILE_INLUDE" >> ~/.profile
+endif
+
 node-setup:
 ifeq ($(CHECK_NPM_BIN_PROFILE),)
 	@echo "********************************************"
@@ -59,13 +80,16 @@ ifeq ($(CHECK_NPM_BIN_PROFILE),)
 	@echo "********************************************"
 	mkdir -p $(NPM_GLOBAL_PATH)
 	npm config set prefix $(NPM_GLOBAL_PATH)
-	echo "$$PROFILE_NPM" >> ~/.profile
+	echo "$$PROFILE_INLUDE" >> ~/.profile
 	@echo "You need relogin to apply ~/.profile changes globally"
 endif
 	@echo "npm setup done"
 tern:
 	curl https://raw.githubusercontent.com/Slava/tern-meteor/master/meteor.js > /tmp/meteor.js
 	cp /tmp/meteor.js ${TERN_PLUG_DIR}
+
+node-extra:
+	npm install -g bower grunt-cli gulp
 
 cpan: cpan-pde cpan-csswatcher cpan-ack cpan-perlcompletion cpan-dev
 
