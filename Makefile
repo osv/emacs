@@ -49,7 +49,7 @@ help:
 	@echo "     make apt node cpan tern"
 	@echo
 	@echo "Note: NPM prefix will be $(NPM_GLOBAL_PATH)"
-	echo $(ARCH)
+
 all: setup-profile apt node node-extra cpan tern
 
 # main targers
