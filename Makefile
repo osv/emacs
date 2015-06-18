@@ -1,6 +1,7 @@
 NODE_VERSION          = v0.12.4
 CHECK_PROFILE_EXTRA   = $(shell grep 'HOME/.profile-extra' ~/.profile)
 NPM_GLOBAL_PATH       = $(HOME)/npm
+NPM		      = $(NPM_GLOBAL_PATH)/bin/npm
 TERN_PLUG_DIR         = $(NPM_GLOBAL_PATH)/lib/node_modules/tern/plugin
 # 86 or 64
 ARCH                  = 64
@@ -38,9 +39,6 @@ endef
 
 export PROFILE_EXTRA
 
-PATH:= "$(NPM_GLOBAL_PATH)/bin:$(PATH)"
-NODE_PATH:= "$(NPM_GLOBAL_PATH)/lib/node_modules:$(NODE_PATH)"
-
 help:
 	@echo "Bootstrap Emacs environment"
 	@echo "Usage:"
@@ -58,7 +56,7 @@ apt:
 	sudo apt-get install perl-doc source-highlight
 
 node: node-install node-setup
-	npm install -g jshint jsonlint tern csslint js-beautify
+	$(NPM) install -g jshint jsonlint tern csslint js-beautify
 
 node-install:
 	mkdir -p $(NPM_GLOBAL_PATH)
@@ -66,6 +64,8 @@ node-install:
 	@echo " Installing node into $(NPM_GLOBAL_PATH)"
 	@echo "********************************************"
 	curl $(NODE_URL) -s -o - | tar xzf - -C $(NPM_GLOBAL_PATH)
+	cp -r $(NPM_GLOBAL_PATH)/node-$(NODE_VERSION)-linux-x$(ARCH)/* $(NPM_GLOBAL_PATH)
+	rm -rf $(NPM_GLOBAL_PATH)/node-$(NODE_VERSION)-linux-x$(ARCH)
 
 setup-profile:
 	echo "$$PROFILE_EXTRA" > ~/.profile-extra
@@ -79,7 +79,7 @@ ifeq ($(CHECK_NPM_BIN_PROFILE),)
 	@echo "I setup NPM prefix to: $(NPM_GLOBAL_PATH)"
 	@echo "********************************************"
 	mkdir -p $(NPM_GLOBAL_PATH)
-	npm config set prefix $(NPM_GLOBAL_PATH)
+	$(NPM) config set prefix $(NPM_GLOBAL_PATH)
 	echo "$$PROFILE_INLUDE" >> ~/.profile
 	@echo "You need relogin to apply ~/.profile changes globally"
 endif
@@ -89,7 +89,7 @@ tern:
 	cp /tmp/meteor.js ${TERN_PLUG_DIR}
 
 node-extra:
-	npm install -g bower grunt-cli gulp
+	$(NPM) install -g bower grunt-cli gulp
 
 cpan: cpan-pde cpan-csswatcher cpan-ack cpan-perlcompletion cpan-dev
 
