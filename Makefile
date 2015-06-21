@@ -16,7 +16,7 @@ define PROFILE_INLUDE
 
 # Autogenerate by ~/emacs/Makefile at "$(shell date)"
 # additional setup, like PATH for node, less colorize
-if [ -d "$$HOME/.profile-extra" ] ; then
+if [ -n "$$HOME/.profile-extra" ] ; then
     . "$$HOME/.profile-extra"
 fi
 # end generete part
