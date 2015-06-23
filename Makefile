@@ -53,7 +53,7 @@ all: setup-profile apt node node-extra cpan tern
 # main targers
 
 apt:
-	sudo apt-get install perl-doc source-highlight
+	sudo apt-get install build-essential perl-doc source-highlight
 
 node: node-install node-setup
 	$(NPM) install -g jshint jsonlint tern csslint js-beautify
@@ -65,7 +65,7 @@ node-install:
 	@echo "********************************************"
 	curl $(NODE_URL) -s -o - | tar xzf - -C $(NPM_GLOBAL_PATH)
 	cp -r $(NPM_GLOBAL_PATH)/node-$(NODE_VERSION)-linux-x$(ARCH)/* $(NPM_GLOBAL_PATH)
-	rm -rf $(NPM_GLOBAL_PATH)/node-$(NODE_VERSION)-linux-x$(ARCH)
+	@rm -rf $(NPM_GLOBAL_PATH)/node-$(NODE_VERSION)-linux-x$(ARCH)
 
 setup-profile:
 	echo "$$PROFILE_EXTRA" > ~/.profile-extra
