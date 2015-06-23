@@ -48,12 +48,21 @@ help:
 	@echo
 	@echo "Note: NPM prefix will be $(NPM_GLOBAL_PATH)"
 
-all: setup-profile apt node node-extra cpan tern
+all: setup-profile apt node node-extra cpan tern editorconfig
 
 # main targers
 
 apt:
-	sudo apt-get install build-essential perl-doc source-highlight
+	sudo apt-get install build-essential cmake perl-doc source-highlight
+
+editorconfig:
+	@echo "*********************************************"
+	@echo " Installing libeditorconfig from"
+	@echo "    https://github.com/editorconfig/editorconfig-core-c"
+	@echo "*********************************************"
+	@rm -rf /tmp/editorconfig-build
+	git clone https://github.com/editorconfig/editorconfig-core-c /tmp/editorconfig-build
+	(cd /tmp/editorconfig-build && cmake . && make && sudo make install)
 
 node: node-install node-setup
 	$(NPM) install -g jshint jsonlint tern csslint js-beautify

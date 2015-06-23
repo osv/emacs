@@ -46,6 +46,7 @@
     discover
     discover-js2-refactor
     dockerfile-mode
+    editorconfig
     egg
     expand-region
     feature-mode
