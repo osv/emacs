@@ -4,7 +4,13 @@
 ;; use `skewer-mode' for interact
 
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
+
+(add-to-list 'auto-mode-alist (cons (regexp-opt '(".tern-project"
+                                              ".bowerrc"
+                                              ".eslintrc"
+                                              ".babelrc"
+                                              ".json"))
+                                    'json-mode))
 
 (require 'discover-js2-refactor)
 (require 'js2-mode)
