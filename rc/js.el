@@ -72,3 +72,8 @@
 ;; (add-to-list 'load-path "~/emacs/js2-refactor.el/")
 ;; (require 'js2-refactor)
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+
+(add-hook 'json-mode-hook
+          (lambda ()
+            (make-local-variable 'js-indent-level)
+            (setq js-indent-level 2)))
