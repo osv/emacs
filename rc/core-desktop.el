@@ -1,3 +1,6 @@
+;; assoc nginx conf
+(add-to-list 'auto-mode-alist '("nginx.*conf$" . nginx-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; diminish keeps the modeline tidy
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
