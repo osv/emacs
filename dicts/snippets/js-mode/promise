@@ -1,0 +1,13 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: promise
+# key: promise
+# binding: direct-keybinding
+# --
+Promise((resolve, reject) => {
+  ${1:method}(${2:options, }(err, data) => {
+    if (err)
+      reject(err);
+    else
+      resolve(data);
+  });
+});

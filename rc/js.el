@@ -9,6 +9,7 @@
                                               ".bowerrc"
                                               ".eslintrc"
                                               ".babelrc"
+                                              ".jshintrc"
                                               ".json"))
                                     'json-mode))
 
