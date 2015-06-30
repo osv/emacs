@@ -65,7 +65,7 @@ editorconfig:
 	(cd /tmp/editorconfig-build && cmake . && make && sudo make install)
 
 node: node-install node-setup
-	$(NPM) install -g jshint jsonlint tern csslint js-beautify
+	$(NPM) install -g jshint jsonlint tern csslint js-beautify js-yaml
 
 node-install:
 	mkdir -p $(NPM_GLOBAL_PATH)
