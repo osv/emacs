@@ -66,6 +66,8 @@ editorconfig:
 
 node: node-install node-setup
 	$(NPM) install -g jshint jsonlint tern csslint js-beautify js-yaml
+# gaze, for fix watchers of gulp
+	$(NPM) install -g fix-gaze
 
 node-install:
 	mkdir -p $(NPM_GLOBAL_PATH)
