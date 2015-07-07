@@ -16,3 +16,5 @@
 
 ;; Sort completion candidates by previous completion choices
 (add-hook 'after-init-hook 'company-statistics-mode)
+
+(setq company-dabbrev-downcase 'nil)
