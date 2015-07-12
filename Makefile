@@ -54,6 +54,8 @@ all: setup-profile apt node node-extra cpan tern editorconfig
 
 apt:
 	sudo apt-get install build-essential cmake perl-doc source-highlight
+# dependencies for editorconf
+	sudo apt-get install libpcre3 libpcre3-dev
 
 editorconfig:
 	@echo "*********************************************"
