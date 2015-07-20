@@ -308,6 +308,17 @@
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; colorize emacs compilation buffer
+;; http://stackoverflow.com/questions/3072648/cucumbers-ansi-colors-messing-up-emacs-compilation-buffer
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region (point-min) (point-max))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; etc
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
