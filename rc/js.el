@@ -4,6 +4,8 @@
 ;; use `skewer-mode' for interact
 
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.es6$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.es7$" . js2-mode))
 
 (add-to-list 'auto-mode-alist (cons (regexp-opt '(".tern-project"
                                               ".bowerrc"
