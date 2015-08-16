@@ -9,6 +9,13 @@
 
 (defvar my--packages
   '(
+    ;; themes
+    aurora-theme
+    alect-themes
+    autumn-light-theme
+    atom-dark-theme
+    grandshell-theme
+    
     org
 
     ac-etags
@@ -116,6 +123,7 @@
 
 (defvar my--ignore-list
   '(
+    helm-core
     json-snatcher
     let-alist
     log4e
