@@ -21,10 +21,9 @@
 (require 'tern)
 ;JS settings start
 
-(setq js-basic-indent 2)
 (setq-default js2-basic-indent 2)
-
 (setq-default js2-basic-offset 2)
+
 (setq-default js2-auto-indent-p t)
 (setq-default js2-cleanup-whitespace t)
 (setq-default js2-enter-indents-newline t)
@@ -68,6 +67,7 @@
 (add-hook 'js2-mode-hook
             (lambda ()
               (tern-mode)
+              (idle-highlight-mode t)
               (set (make-local-variable 'company-backends) '(company-tern company-files company-yasnippet))))
 (define-key js2-mode-map (kbd "M-SPC") 'company-tern)
 (define-key js2-mode-map (kbd "RET") 'js2-line-break) ; I use ret for line break, not M-j
