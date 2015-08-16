@@ -44,7 +44,7 @@
 
 (setq web-mode-engines-alist
       '(("mojolicious" . "\\.html.ep")
-        ("ctemplate" . "\\.html")))
+        ("angular" . "\\.html")))
 
 (add-to-list 'web-mode-engine-attr-regexps
              '("ctemplate"   . "data-"))
