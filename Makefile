@@ -44,11 +44,11 @@ help:
 	@echo "Usage:"
 	@echo "     make all"
 	@echo "or"
-	@echo "     make apt node cpan tern"
+	@echo "     make apt node cpan tern cpan-pde apt-desktop"
 	@echo
 	@echo "Note: NPM prefix will be $(NPM_GLOBAL_PATH)"
 
-all: setup-profile apt node node-extra cpan tern editorconfig
+all: setup-profile apt apt-desktop node node-extra cpan tern editorconfig
 
 # main targers
 
@@ -56,6 +56,9 @@ apt:
 	sudo apt-get install build-essential cmake perl-doc source-highlight
 # dependencies for editorconf
 	sudo apt-get install libpcre3 libpcre3-dev
+
+apt-desktop:
+	sudo apt-get install scrot xfonts-terminus conky-cli
 
 editorconfig:
 	@echo "*********************************************"
@@ -104,7 +107,7 @@ tern:
 node-extra:
 	$(NPM) install -g bower grunt-cli gulp
 
-cpan: cpan-pde cpan-csswatcher cpan-ack cpan-perlcompletion cpan-dev
+cpan: cpan-csswatcher cpan-ack cpan-perlcompletion cpan-dev
 
 # etc
 CPAN_INSTALL=sudo cpan -i
