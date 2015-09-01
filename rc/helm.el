@@ -32,6 +32,7 @@
 ;; `C-c p' - prefix
 (require 'helm-projectile)
 (helm-projectile-on)
+(global-set-key (kbd "C-c p C-s") 'helm-projectile-ack)
 
 (require 'helm-swoop)
 (global-set-key (kbd "M-i") 'helm-swoop)
