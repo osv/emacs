@@ -58,7 +58,7 @@ apt:
 	sudo apt-get install libpcre3 libpcre3-dev
 
 apt-desktop:
-	sudo apt-get install scrot xfonts-terminus conky-cli
+	sudo apt-get install scrot xfonts-terminus conky-cli x11-xserver-utils
 
 editorconfig:
 	@echo "*********************************************"
