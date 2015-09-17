@@ -55,7 +55,7 @@ all: setup-profile apt apt-desktop node node-extra cpan tern editorconfig
 apt:
 	sudo apt-get install build-essential cmake perl-doc source-highlight
 # dependencies for editorconf
-	sudo apt-get install libpcre3 libpcre3-dev
+	sudo apt-get install libpcre3 libpcre3-dev pwgen
 
 apt-desktop:
 	sudo apt-get install scrot xfonts-terminus conky-cli x11-xserver-utils
