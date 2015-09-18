@@ -90,6 +90,7 @@
     volatile-highlights
     org-pomodoro
     org-screenshot
+    php-mode
     plsense
     plsense-direx
     popup
@@ -113,6 +114,8 @@
     yaxception
     jade-mode
     less-css-mode
+    sass-mode
+    scss-mode
     slim-mode
     stylus-mode
     markdown-mode
