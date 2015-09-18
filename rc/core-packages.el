@@ -79,6 +79,7 @@
     js2-mode
     js-doc
     js2-refactor
+    js2-highlight-vars
     json-mode
     json-reformat
     lua-mode
