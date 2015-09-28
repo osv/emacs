@@ -38,6 +38,7 @@
     auto-complete
     bbdb-
     bbdb
+    btc-ticker
     cg
     coffee-mode
     company
@@ -56,6 +57,7 @@
     editorconfig
     egg
     expand-region
+    erlang
     feature-mode
     flim
     flx
@@ -63,6 +65,7 @@
     flycheck
     flymake-easy
     glsl-mode
+    go-mode
     google-translate
     git-gutter
     haskell-mode
