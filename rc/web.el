@@ -107,6 +107,7 @@
 		     ac-source-filename
                      ac-source-yasnippet
                      ))))
+  (emmet-mode t)
   (set (make-local-variable 'company-backends) '(company-web-html company-yasnippet company-files))
   (setq web-mode-enable-auto-quoting nil))
 
