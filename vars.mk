@@ -32,9 +32,8 @@ define PROFILE_EXTRA
       PATH="$(NPM_GLOBAL_PATH)/bin:$$PATH"
       NODE_PATH="$(NPM_GLOBAL_PATH)/lib/node_modules:$$NODE_PATH"
   fi
-
-  export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
-  export LESS=' -R '
+export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+export LESS=' -R '
 endef
 
 export PROFILE_EXTRA

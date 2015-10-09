@@ -50,7 +50,8 @@ node-install:
 	@rm -rf $(NPM_GLOBAL_PATH)/node-$(NODE_VERSION)-linux-x$(ARCH)
 	@$(PRINT_OK)
 
-setup-profile:
+setup-profile: bash-git-prompt
+	@cp -v .bash_profile ~/
 	echo "$$PROFILE_EXTRA" > ~/.profile-extra
 ifeq ($(CHECK_PROFILE_EXTRA),)
 	echo "$$PROFILE_INLUDE" >> ~/.profile
@@ -105,4 +106,9 @@ cpan-perlcompletion:
 
 cpan-dev:
 	${CPAN_INSTALL} Perl::Critic Perl::Tidy
+	@$(PRINT_OK)
+
+bash-git-prompt:
+	@mkdir -p ~/work/other
+	@-git clone --depth 1 https://github.com/magicmonty/bash-git-prompt.git ~/work/other/bash-git-prompt
 	@$(PRINT_OK)
