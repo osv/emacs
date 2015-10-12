@@ -52,8 +52,7 @@ node-install:
 	@rm -rf $(NPM_GLOBAL_PATH)/node-$(NODE_VERSION)-linux-x$(ARCH)
 	@$(PRINT_OK)
 
-setup-profile: bash-git-prompt
-	@cp -v .bash_profile ~/
+setup-profile: bash-git-prompt bash-extra
 	echo "$$PROFILE_EXTRA" > ~/.profile-extra
 ifeq ($(CHECK_PROFILE_EXTRA),)
 	echo "$$PROFILE_INLUDE" >> ~/.profile
@@ -111,6 +110,20 @@ cpan-dev:
 	@$(PRINT_OK)
 
 bash-git-prompt:
-	@mkdir -p ~/work/other
-	@-git clone --depth 1 https://github.com/magicmonty/bash-git-prompt.git ~/work/other/bash-git-prompt
+	@mkdir -p ~/tools/other
+	@-git clone --depth 1 https://github.com/magicmonty/bash-git-prompt.git ~/work/tools/bash-git-prompt
 	@$(PRINT_OK)
+
+bash-extra:
+	@cp -v .bash-extra ~/
+ifeq ($(CHECK_BASH_EXTRA),)
+	echo "$$BASH_INLUDE" >> ~/.bashrc
+endif
+	@$(PRINT_OK)
+
+clean:
+	@echo "You should remove next resource manually:"
+	@echo " ~/work/tools/bash-git-prompt"
+	@echo " $(NPM_GLOBAL_PATH)"
+	@echo " ~/.profile-extra"
+	@echo " ~/.bash-extra"

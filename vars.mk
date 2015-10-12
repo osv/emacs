@@ -1,5 +1,6 @@
 NODE_VERSION          = v0.12.4
 CHECK_PROFILE_EXTRA   = $(shell grep 'HOME/.profile-extra' ~/.profile)
+CHECK_BASH_EXTRA      = $(shell grep 'HOME/.bash-extra' ~/.bashrc)
 NPM_GLOBAL_PATH       = $(HOME)/npm
 NPM		      = $(NPM_GLOBAL_PATH)/bin/npm
 TERN_PLUG_DIR         = $(NPM_GLOBAL_PATH)/lib/node_modules/tern/plugin
@@ -23,6 +24,19 @@ fi
 endef
 
 export PROFILE_INLUDE
+
+# next heredoc will be included to .profile
+define BASH_INLUDE
+
+# Autogenerate by ~/emacs/Makefile at "$(shell date)"
+# additional setup, like PATH for node, less colorize
+if [ -n "$$HOME/.bash-extra" ] ; then
+    . "$$HOME/.bash-extra"
+fi
+# end generete part
+endef
+
+export BASH_INLUDE
 
 # heredoc content of ~/.profile-extra
 define PROFILE_EXTRA

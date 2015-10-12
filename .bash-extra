@@ -1,0 +1,12 @@
+alias dockerrm="docker rm $$(docker ps -a -q)"
+alias asJson="source-highlight -f esc --lang-def=javascript.lang --style-file=esc.style"
+
+bind '"\e[A"':history-search-backward
+bind '"\e[B"':history-search-forward
+
+if [ -f "$HOME/work/tools/bash-git-prompt/gitprompt.sh" ]; then
+   .  $HOME/work/tools/bash-git-prompt/gitprompt.sh
+fi
+
+export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+export LESS=' -R '
