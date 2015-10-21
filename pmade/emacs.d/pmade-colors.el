@@ -187,6 +187,9 @@
    '(error ((t (:foreground "deep pink"))))
    '(warning ((t (:foreground "goldenrod"))))
 
+   ;; js2
+   '(js2-external-variable ((t (:foreground "purple1"))))
+
    ;; helm mode
    ;;'(helm-selection ((t (:inverse-video t :underline "dark green"))))
    '(helm-selection ((t (:background "grey" :foreground "black"))))
