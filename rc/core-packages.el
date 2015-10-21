@@ -44,6 +44,7 @@
     company
     company-tern
     company-statistics
+    company-restclient
     css-eldoc
     dash
     diminish
@@ -99,6 +100,7 @@
     popup
     projectile
     rainbow-mode
+    restclient
 ;;    register-channel
     simple-httpd
     slime
