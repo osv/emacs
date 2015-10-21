@@ -134,3 +134,6 @@
 
 (require 'helm-css-scss)
 
+(add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
+(add-hook 'restclient-mode (lambda ()
+                             (set (make-local-variable 'company-backends) '(company-restclient company-files))))
