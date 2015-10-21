@@ -7,21 +7,23 @@ help:
 	@echo "or"
 	@echo "     make setup-profile apt apt-desktop node node-extra cpan tern editorconfig"
 	@echo
+	@echo "and additionally you can:"
+	@echo "    make apt-desktop"
 	@echo "Note: NPM prefix will be $(NPM_GLOBAL_PATH)"
 
-all: setup-profile apt apt-desktop node node-extra cpan tern editorconfig
+all: setup-profile apt node node-extra cpan tern editorconfig
 	@$(PRINT_OK)
 
 # main targers
 
 apt:
-	sudo apt-get install build-essential cmake perl-doc source-highlight
+	sudo apt-get install -y build-essential curl cmake perl-doc source-highlight
 # dependencies for editorconf
-	sudo apt-get install libpcre3 libpcre3-dev pwgen
+	sudo apt-get install -y libpcre3 libpcre3-dev pwgen
 	@$(PRINT_OK)
 
 apt-desktop:
-	sudo apt-get install scrot xfonts-terminus conky-cli x11-xserver-utils
+	sudo apt-get install -y scrot xfonts-terminus conky-cli x11-xserver-utils
 	@$(PRINT_OK)
 
 editorconfig:
