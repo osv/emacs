@@ -90,7 +90,7 @@
 (put 'web-mode 'flyspell-mode-predicate 'web-mode-flyspefll-verify)
 
 (defun my-web-mode-hook ()
-  "Hook for Web mode."
+  "Hook for `web-mode'."
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
@@ -108,7 +108,8 @@
                      ac-source-yasnippet
                      ))))
   (emmet-mode t)
-  (set (make-local-variable 'company-backends) '(company-web-html company-yasnippet company-files))
+  (set (make-local-variable 'company-backends)
+       '(company-tern company-web-html company-yasnippet company-files))
   (setq web-mode-enable-auto-quoting nil))
 
 ;; maybe in future add this
@@ -116,9 +117,22 @@
 
 (add-hook 'web-mode-hook 'my-web-mode-hook)
 
+;; Enable JavaScript completion between <script>...</script> etc.
+(defadvice company-tern (before web-mode-set-up-ac-sources activate)
+  "Set `tern-mode' based on current language before running company-tern."
+  (message "advice")
+  (if (equal major-mode 'web-mode)
+      (let ((web-mode-cur-language
+             (web-mode-language-at-pos)))
+        (if (or (string= web-mode-cur-language "javascript")
+                (string= web-mode-cur-language "jsx")
+                )
+            (unless tern-mode (tern-mode))
+          (if tern-mode (tern-mode -1))))))
 
-;; manual js autocomplete
-(define-key web-mode-map (kbd "M-SPC") 'company-web-html)
+
+;; manual autocomplete
+(define-key web-mode-map (kbd "M-SPC") 'company-complete)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CSS
