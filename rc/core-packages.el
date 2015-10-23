@@ -147,6 +147,7 @@
     s
     epl
     gntp
+    seq
     )
   "Don't show next packages in not bundled. They installed as dependence")
 
