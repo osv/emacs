@@ -16,14 +16,30 @@ all: setup-profile apt node node-extra cpan tern editorconfig
 
 # main targers
 
-apt:
-	sudo apt-get install -y build-essential curl cmake perl-doc source-highlight
+apt: apt-update apt-utils
+	sudo apt-get install -y build-essential \
+				curl \
+				cmake
 # dependencies for editorconf
 	sudo apt-get install -y libpcre3 libpcre3-dev pwgen
 	@$(PRINT_OK)
 
-apt-desktop:
-	sudo apt-get install -y scrot xfonts-terminus conky-cli x11-xserver-utils
+apt-desktop: apt-update
+	sudo apt-get install -y scrot \
+				perl-doc \
+				xfonts-terminus \
+				conky-cli \
+				x11-xserver-utils
+	@$(PRINT_OK)
+
+apt-utils: apt-update
+	sudo apt-get install -y iptraf \
+				screen \
+				source-highlight
+	@$(PRINT_OK)
+
+apt-update:
+	sudo apt-get update
 	@$(PRINT_OK)
 
 editorconfig:
