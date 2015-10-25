@@ -53,7 +53,14 @@ editorconfig:
 	@$(PRINT_OK)
 
 node: node-install node-setup
-	$(NPM) install -g jshint jsonlint tern csslint js-beautify js-yaml
+	$(NPM) install -g jshint \
+			  	jsonlint \
+				tern \
+				csslint \
+				js-beautify \
+				js-yaml \
+				lessc
+
 # gaze, for fix watchers of gulp
 	$(NPM) install -g fix-gaze
 	@$(PRINT_OK)
