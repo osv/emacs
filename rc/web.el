@@ -139,6 +139,12 @@
 
 (add-hook  'css-mode-hook
            (lambda ()
+             (flycheck-mode +1)
+             (rainbow-mode +1)))
+
+(add-hook  'less-mode-hook
+           (lambda ()
+             (flycheck-mode +1)
              (rainbow-mode +1)))
 
 (css-eldoc-enable)
