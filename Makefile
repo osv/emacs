@@ -97,6 +97,8 @@ node-lint:
 			csslint \
 			js-beautify \
 			js-yaml \
+			jscs \
+			jscs-trailing-comma \
 			less
 	@$(PRINT_OK)
 
