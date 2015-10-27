@@ -98,6 +98,7 @@ node-lint:
 			js-beautify \
 			js-yaml \
 			jscs \
+			jscs-trailing-comma \
 			eslint \
 			eslint-plugin-angular \
 			less
