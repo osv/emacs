@@ -97,6 +97,9 @@ node-lint:
 			csslint \
 			js-beautify \
 			js-yaml \
+			jscs \
+			eslint \
+			eslint-plugin-angular \
 			less
 	@$(PRINT_OK)
 
