@@ -1,6 +1,7 @@
 NODE_VERSION          = v0.12.4
 CHECK_PROFILE_EXTRA   = $(shell grep 'HOME/.profile-extra' ~/.profile)
 CHECK_BASH_EXTRA      = $(shell grep 'HOME/.bash-extra' ~/.bashrc)
+CHECK_XDEFAULTS_EXTRA = $(shell grep '^\s*#include ".Xdefaults-extra"' ~/.Xdefaults)
 NPM_GLOBAL_PATH       = $(HOME)/npm
 NPM		      = $(NPM_GLOBAL_PATH)/bin/npm
 TERN_PLUG_DIR         = $(NPM_GLOBAL_PATH)/lib/node_modules/tern/plugin
