@@ -1,7 +1,7 @@
 NODE_VERSION          = v0.12.4
 CHECK_PROFILE_EXTRA   = $(shell grep 'HOME/.profile-extra' ~/.profile)
 CHECK_BASH_EXTRA      = $(shell grep 'HOME/.bash-extra' ~/.bashrc)
-CHECK_XDEFAULTS_EXTRA = $(shell grep '^\s*#include ".Xdefaults-extra"' ~/.Xdefaults)
+CHECK_XDEFAULTS_EXTRA = $(shell grep '^\s*\#include ".Xdefaults-extra"' ~/.Xdefaults)
 NPM_GLOBAL_PATH       = $(HOME)/npm
 NPM		      = $(NPM_GLOBAL_PATH)/bin/npm
 TERN_PLUG_DIR         = $(NPM_GLOBAL_PATH)/lib/node_modules/tern/plugin
@@ -55,6 +55,14 @@ fi
 endef
 
 export PROFILE_EXTRA
+
+# next heredoc will be included to .Xdefaults
+define XDEFAULTS_INLUDE
+! Autogenerate by ~/emacs/Makefile at "$(shell date)"
+#include ".Xdefaults-extra"
+endef
+
+export XDEFAULTS_INLUDE
 
 # color: https://gist.github.com/vmrob/8924878 http://vmrob.com/colorized-makefiles/
 NO_COLOR=\033[0m

@@ -11,7 +11,7 @@ help:
 	@echo "    make apt-desktop"
 	@echo "Note: NPM prefix will be $(NPM_GLOBAL_PATH)"
 	@echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-	@echo "  setup-profile - bash-git-prompt, bash profile, .profile-extra"
+	@echo "  setup-profile - bash-git-prompt, bash profile, .profile-extra, .Xdefault-Extra"
 	@echo "  apt - build-essential, pwgen, screen, iptraf, source-highlight"
 	@echo "  node - install node.js and setup .profile to set NODE_PATH"
 	@echo "  node-extra - tern.js gulp, bower, etc"
@@ -77,7 +77,7 @@ node-install:
 	@rm -rf $(NPM_GLOBAL_PATH)/node-$(NODE_VERSION)-linux-x$(ARCH)
 	@$(PRINT_OK)
 
-setup-profile: bash-git-prompt bash-extra
+setup-profile: bash-git-prompt bash-extra xdefault-extra
 	echo "$$PROFILE_EXTRA" > ~/.profile-extra
 ifeq ($(CHECK_PROFILE_EXTRA),)
 	echo "$$PROFILE_INLUDE" >> ~/.profile
@@ -163,6 +163,13 @@ bash-extra:
 	@cp -v .bash-extra ~/
 ifeq ($(CHECK_BASH_EXTRA),)
 	echo "$$BASH_INLUDE" >> ~/.bashrc
+endif
+	@$(PRINT_OK)
+
+xdefault-extra:
+	@cp -v .Xdefaults-extra ~/
+ifeq ($(CHECK_XDEFAULTS_EXTRA),)
+	echo "$$XDEFAULTS_INLUDE" >> ~/.Xdefaults
 endif
 	@$(PRINT_OK)
 
