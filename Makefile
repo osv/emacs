@@ -10,6 +10,16 @@ help:
 	@echo "and additionally you can:"
 	@echo "    make apt-desktop"
 	@echo "Note: NPM prefix will be $(NPM_GLOBAL_PATH)"
+	@echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+	@echo "  setup-profile - bash-git-prompt, bash profile, .profile-extra"
+	@echo "  apt - build-essential, pwgen, screen, iptraf, source-highlight"
+	@echo "  node - install node.js and setup .profile to set NODE_PATH"
+	@echo "  node-extra - tern.js gulp, bower, etc"
+	@echo "  node-lint - varios lint tools that required by flycheck-mode.el"
+	@echo "  cpan - csswatcher ack perlcompletion perltidy"
+	@echo "  editorconfig - download and install libeditorconfig from source"
+	@echo "  tern - some tern.js plugins"
+	@echo 'For update profile type "make setup-profile"'
 
 all: setup-profile apt node node-extra node-lint cpan tern editorconfig
 	@$(PRINT_OK)
@@ -28,6 +38,7 @@ apt-desktop: apt-update
 	sudo apt-get install -y scrot \
 				perl-doc \
 				xfonts-terminus \
+				ttf-dejavu \
 				conky-cli \
 				x11-xserver-utils \
 				xscreensaver
@@ -88,6 +99,7 @@ endif
 
 tern:
 	curl https://raw.githubusercontent.com/Slava/tern-meteor/master/meteor.js > /tmp/meteor.js
+	@mkdir -p ${TERN_PLUG_DIR}
 	cp /tmp/meteor.js ${TERN_PLUG_DIR}
 	@$(PRINT_OK)
 
@@ -143,6 +155,7 @@ cpan-dev:
 
 bash-git-prompt:
 	@mkdir -p ~/tools/other
+# see .bash-extra, where is check for existing dir bash-git-prompt
 	@-git clone --depth 1 https://github.com/magicmonty/bash-git-prompt.git ~/work/tools/bash-git-prompt
 	@$(PRINT_OK)
 
