@@ -43,12 +43,15 @@ export BASH_INLUDE
 define PROFILE_EXTRA
 #!/bin/bash
 #Setup env
-  if [ -d "$(NPM_GLOBAL_PATH)/bin" ] ; then
-      PATH="$(NPM_GLOBAL_PATH)/bin:$$PATH"
-      NODE_PATH="$(NPM_GLOBAL_PATH)/lib/node_modules:$$NODE_PATH"
+if [ -d "$(NPM_GLOBAL_PATH)/bin" ] ; then
+	PATH="$(NPM_GLOBAL_PATH)/bin:$$PATH"
+	NODE_PATH="$(NPM_GLOBAL_PATH)/lib/node_modules:$$NODE_PATH"
   fi
-export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
-export LESS=' -R '
+
+if [ -x "/usr/share/source-highlight/src-hilite-lesspipe.sh" ]; then
+	export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+	export LESS=' -R '
+fi
 endef
 
 export PROFILE_EXTRA
