@@ -22,6 +22,7 @@
    '(hl-line ((t :background "#000000" :underline "#444444" :bold t)))
    '(font-lock-comment-face ((t (:italic t :foreground "#B150E7"))))
    '(font-lock-comment-delimiter-face ((t (:foreground "#888888"))))
+   '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "OliveDrab1"))))
    '(font-lock-string-face ((t (:foreground "#A5F26E"))))
    '(font-lock-keyword-face ((t (:bold t :foreground "#CC7832"))))
    '(font-lock-warning-face ((t (:underline "red"))))
