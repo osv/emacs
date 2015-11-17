@@ -41,6 +41,7 @@ apt-desktop: apt-update
 				ttf-dejavu \
 				conky-cli \
 				x11-xserver-utils \
+				rxvt-unicode \
 				xscreensaver
 	@$(PRINT_OK)
 
