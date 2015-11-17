@@ -42,6 +42,7 @@ apt-desktop: apt-update
 				conky-cli \
 				x11-xserver-utils \
 				rxvt-unicode \
+				gitk \
 				xscreensaver
 	@$(PRINT_OK)
 
