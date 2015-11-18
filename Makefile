@@ -8,7 +8,7 @@ help:
 	@echo "     make setup-profile apt apt-desktop node node-extra node-lint cpan tern editorconfig"
 	@echo
 	@echo "and additionally you can:"
-	@echo "    make apt-desktop"
+	@echo "    make apt-desktop apt-xmonad"
 	@echo "Note: NPM prefix will be $(NPM_GLOBAL_PATH)"
 	@echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 	@echo "  setup-profile - bash-git-prompt, bash profile, .profile-extra, .Xdefault-Extra"
@@ -43,7 +43,15 @@ apt-desktop: apt-update
 				x11-xserver-utils \
 				rxvt-unicode \
 				gitk \
+				mc \
 				xscreensaver
+	@$(PRINT_OK)
+
+apt-xmonad:
+	sudo apt-get install -y xmonad \
+				dzen2 \
+				conky
+
 	@$(PRINT_OK)
 
 apt-utils: apt-update
