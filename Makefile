@@ -44,6 +44,7 @@ apt-desktop: apt-update
 				rxvt-unicode \
 				gitk \
 				mc \
+				kbdd \
 				xscreensaver
 	@$(PRINT_OK)
 
@@ -131,6 +132,7 @@ node-extra:
 			grunt-cli \
 			gulp \
 			fix-gaze \
+			http-server \
 			tern
 
 	@$(PRINT_OK)
