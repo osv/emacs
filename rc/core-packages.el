@@ -23,6 +23,7 @@
     ac-html-bootstrap
     ac-html-csswatcher
     apache-mode
+    bash-completion
     company-web
     web-completion-data
     emmet-mode
@@ -101,6 +102,7 @@
     projectile
     rainbow-mode
     restclient
+    region-state
 ;;    register-channel
     simple-httpd
     slime
@@ -115,6 +117,7 @@
     web-mode
     window-numbering
     yaml-mode
+    yaml-tomato
     yasnippet
     yaxception
     jade-mode
