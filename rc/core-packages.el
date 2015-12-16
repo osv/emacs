@@ -79,6 +79,7 @@
     helm-projectile
     helm-swoop
     highlight-parentheses
+    highlight-indent-guides
     idle-highlight-mode
     jabber
     js2-mode
@@ -151,6 +152,9 @@
     epl
     gntp
     seq
+    bpr
+    request
+    hexrgb
     )
   "Don't show next packages in not bundled. They installed as dependence")
 
