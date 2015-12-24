@@ -191,6 +191,10 @@
    ;; js2
    '(js2-external-variable ((t (:foreground "purple1"))))
 
+   
+   '(highlight-indent-guides-odd-face ((t (:background "#2a2a2a"))))
+       '(highlight-indent-guides-even-face ((t (:background "#373737"))))
+      
    ;; helm mode
    ;;'(helm-selection ((t (:inverse-video t :underline "dark green"))))
    '(helm-selection ((t (:background "grey" :foreground "black"))))
