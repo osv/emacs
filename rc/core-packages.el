@@ -20,6 +20,7 @@
 
     ac-etags
     ac-html
+    ac-html-angular
     ac-html-bootstrap
     ac-html-csswatcher
     apache-mode
@@ -61,6 +62,7 @@
     expand-region
     erlang
     feature-mode
+    fireplace
     flim
     flx
     flx-ido
