@@ -1,6 +1,9 @@
 ;; https://mail.haskell.org/pipermail/xmonad/2008-January/004471.html
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
+(add-to-list 'auto-mode-alist '("\\.cron\\(tab\\)?\\'" . crontab-mode))
+(add-to-list 'auto-mode-alist '("cron\\(tab\\)?\\."    . crontab-mode))
+
 ;; assoc nginx conf
 (add-to-list 'auto-mode-alist '("nginx.*conf$" . nginx-mode))
 

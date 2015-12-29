@@ -48,6 +48,7 @@
     company-statistics
     company-restclient
     css-eldoc
+    crontab-mode
     dash
     diminish
     dired-hacks-utils
