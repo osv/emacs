@@ -94,6 +94,7 @@
     lua-mode
     minimap
     multiple-cursors
+    neotree
     nyan-mode
     nginx-mode
     volatile-highlights
