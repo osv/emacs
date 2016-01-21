@@ -133,6 +133,7 @@ node-extra:
 			gulp \
 			fix-gaze \
 			http-server \
+			mongo-hacker \
 			tern
 
 	@$(PRINT_OK)
