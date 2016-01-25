@@ -48,6 +48,9 @@
 
 (add-to-list 'web-mode-engine-attr-regexps
              '("ctemplate"   . "data-"))
+(add-to-list 'web-mode-engine-attr-regexps
+             '("angular"   . "data-")
+             '("angular"   . "ng-"))
 
 ;; make web-mode play nice with smartparens
 (setq web-mode-enable-auto-pairing nil)
