@@ -1,6 +1,8 @@
 alias dockerrm="docker rm $$(docker ps -a -q)"
 alias asJson="source-highlight -f esc --lang-def=javascript.lang --style-file=esc.style"
 
+alias ee="emacs -q -nw"
+
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
 
