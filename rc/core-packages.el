@@ -45,6 +45,7 @@
     coffee-mode
     company
     company-tern
+    company-shell
     company-statistics
     company-restclient
     css-eldoc
