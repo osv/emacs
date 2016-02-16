@@ -1,7 +1,9 @@
 alias dockerrm="docker rm $$(docker ps -a -q)"
 alias asJson="source-highlight -f esc --lang-def=javascript.lang --style-file=esc.style"
 
-alias ee="emacs -q -nw"
+MY_EDITOR="emacs -q -nw --eval '(load-file \"~/emacs/init-tiny.el\")'"
+alias ee="${MY_EDITOR}"
+export EDITOR="${MY_EDITOR}"
 
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
