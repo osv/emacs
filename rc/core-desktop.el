@@ -158,6 +158,10 @@
 ;; dired
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; custom ls (https://github.com/osener/emacs.d/blob/master/osener.org#dired)
+(setq dired-listing-switches
+      "-aGhlvF --group-directories-first --time-style=long-iso")
+
 ;; rainbow
 (require 'dired-rainbow)
 (dired-rainbow-define webhtml "#aaf" ("htm" "html" "xhtml"))
