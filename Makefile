@@ -45,6 +45,7 @@ apt-desktop: apt-update
 				gitk \
 				mc \
 				kbdd \
+				eog \
 				xscreensaver
 	@$(PRINT_OK)
 
