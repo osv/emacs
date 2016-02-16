@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: hbb
+# key: hbb
+# binding: direct-keybinding
+# --
+\{\{#${1:block} $2\}\}
+  $0
+\{\{/$1\}\}
