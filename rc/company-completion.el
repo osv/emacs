@@ -18,3 +18,8 @@
 (add-hook 'after-init-hook 'company-statistics-mode)
 
 (setq company-dabbrev-downcase 'nil)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; company-shell
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'company-backends 'company-shell)
