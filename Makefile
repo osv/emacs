@@ -135,6 +135,7 @@ node-extra:
 			fix-gaze \
 			http-server \
 			mongo-hacker \
+			chokidar-cli \
 			tern
 
 	@$(PRINT_OK)
