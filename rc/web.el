@@ -39,11 +39,13 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tt\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tag\\'" . web-mode))
 (add-to-list 'auto-mode-alist
              '("/\\(views\\|html\\|theme\\|templates\\)/.*\\.php\\'" . web-mode))
 
 (setq web-mode-engines-alist
       '(("mojolicious" . "\\.html.ep")
+        ("dust" . "\\.tag")
         ("angular" . "\\.html")))
 
 (add-to-list 'web-mode-engine-attr-regexps
