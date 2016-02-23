@@ -1,37 +1,69 @@
  include vars.mk
 
 help:
-	@echo "Bootstrap Emacs environment"
+	@echo "                Bootstrap Emacs environment"
+	@echo "================================================================"
 	@echo "Usage:"
+	@echo
+	@echo "     make nvm"
 	@echo "     make all"
 	@echo "or"
-	@echo "     make setup-profile apt apt-desktop node node-extra node-lint cpan tern editorconfig"
+	@echo	
+	@echo "     make setup-profile apt apt-desktop node node-lint node-extra node-tern cpan editorconfig"
 	@echo
 	@echo "and additionally you can:"
+	@echo
 	@echo "    make apt-desktop apt-xmonad"
-	@echo "Note: NPM prefix will be $(NPM_GLOBAL_PATH)"
 	@echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 	@echo "  setup-profile - bash-git-prompt, bash profile, .profile-extra, .Xdefault-Extra"
 	@echo "  apt - build-essential, pwgen, screen, iptraf, source-highlight"
-	@echo "  node - install node.js and setup .profile to set NODE_PATH"
-	@echo "  node-extra - tern.js gulp, bower, etc"
+	@echo "  node - nvm install and use node.js $(NODE_VERSION)"
 	@echo "  node-lint - varios lint tools that required by flycheck-mode.el"
+	@echo "  node-extra - tern.js gulp, bower, mongohacker, etc"
+	@echo "  node-tern - some tern.js plugins"
 	@echo "  cpan - csswatcher ack perlcompletion perltidy"
 	@echo "  editorconfig - download and install libeditorconfig from source"
-	@echo "  tern - some tern.js plugins"
-	@echo 'For update profile type "make setup-profile"'
+	@echo
+	@echo 'For update yout profile type "make setup-profile"'
+	@echo
+	@echo ''
 
-all: setup-profile apt node node-extra node-lint cpan tern editorconfig
+nvm: ~/.nvm/nvm.sh
+	@$(PRINT_OK)
+	@echo
+	@echo "Now run bash again to apply env of nvm"
+	@echo "Also you may need run \"make setup-profile\" to setup your .profile"
+	@echo "that help use nvm's node (be cause your WM not source .bashrc)."
+
+# nvm install if not exist dir
+~/.nvm/nvm.sh:
+	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+
+all: setup-profile apt node node-extra node-lint cpan node-tern editorconfig
 	@$(PRINT_OK)
 
 # main targers
 
-apt: apt-update apt-utils
+apt: apt-update apt-make apt-utils
+	@$(PRINT_OK)
+
+apt-make:
 	sudo apt-get install -y build-essential \
 				curl \
 				cmake
 # dependencies for editorconf
-	sudo apt-get install -y libpcre3 libpcre3-dev pwgen
+	sudo apt-get install -y libpcre3 libpcre3-dev
+	@$(PRINT_OK)
+
+apt-utils: apt-update
+	sudo apt-get install -y iptraf \
+				screen \
+				pwgen \
+				source-highlight
+	@$(PRINT_OK)
+
+apt-update:
+	sudo apt-get update
 	@$(PRINT_OK)
 
 apt-desktop: apt-update
@@ -53,17 +85,6 @@ apt-xmonad:
 	sudo apt-get install -y xmonad \
 				dzen2 \
 				conky
-
-	@$(PRINT_OK)
-
-apt-utils: apt-update
-	sudo apt-get install -y iptraf \
-				screen \
-				source-highlight
-	@$(PRINT_OK)
-
-apt-update:
-	sudo apt-get update
 	@$(PRINT_OK)
 
 editorconfig:
@@ -73,21 +94,16 @@ editorconfig:
 	@echo "*********************************************"
 	@rm -rf /tmp/editorconfig-build
 	git clone https://github.com/editorconfig/editorconfig-core-c /tmp/editorconfig-build
+# I test 0.12.1-development and it ok
 	(cd /tmp/editorconfig-build && cmake . && make && sudo make install)
 	@$(PRINT_OK)
 
-node: node-install node-setup
+node: install-node
 	@$(PRINT_OK)
 
-node-install:
-	mkdir -p $(NPM_GLOBAL_PATH)
-	@echo "********************************************"
-	@echo " Installing node into $(NPM_GLOBAL_PATH)"
-	@echo "********************************************"
-	curl $(NODE_URL) -s -o - | tar xzf - -C $(NPM_GLOBAL_PATH)
-	cp -r $(NPM_GLOBAL_PATH)/node-$(NODE_VERSION)-linux-x$(ARCH)/* $(NPM_GLOBAL_PATH)
-	@rm -rf $(NPM_GLOBAL_PATH)/node-$(NODE_VERSION)-linux-x$(ARCH)
-	@$(PRINT_OK)
+install-node:
+	$(NVM) install $(NODE_VERSION)
+	$(NVM) use $(NODE_VERSION)
 
 setup-profile: bash-git-prompt bash-extra xdefault-extra
 	echo "$$PROFILE_EXTRA" > ~/.profile-extra
@@ -96,20 +112,7 @@ ifeq ($(CHECK_PROFILE_EXTRA),)
 endif
 	@$(PRINT_OK)
 
-node-setup:
-ifeq ($(CHECK_NPM_BIN_PROFILE),)
-	@echo "********************************************"
-	@echo "I setup NPM prefix to: $(NPM_GLOBAL_PATH)"
-	@echo "********************************************"
-	mkdir -p $(NPM_GLOBAL_PATH)
-	$(NPM) config set prefix $(NPM_GLOBAL_PATH)
-	echo "$$PROFILE_INLUDE" >> ~/.profile
-	@echo "You need relogin to apply ~/.profile changes globally"
-endif
-	@echo "npm setup done"
-	@$(PRINT_OK)
-
-tern:
+node-tern:
 	curl https://raw.githubusercontent.com/Slava/tern-meteor/master/meteor.js > /tmp/meteor.js
 	@mkdir -p ${TERN_PLUG_DIR}
 	cp /tmp/meteor.js ${TERN_PLUG_DIR}

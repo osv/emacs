@@ -1,9 +1,10 @@
-NODE_VERSION          = v0.12.4
+NODE_VERSION          = v5.6.0
 CHECK_PROFILE_EXTRA   = $(shell grep 'HOME/.profile-extra' ~/.profile)
 CHECK_BASH_EXTRA      = $(shell grep 'HOME/.bash-extra' ~/.bashrc)
 CHECK_XDEFAULTS_EXTRA = $(shell grep '^\s*\#include ".Xdefaults-extra"' ~/.Xdefaults)
-NPM_GLOBAL_PATH       = $(HOME)/npm
-NPM		      = $(NPM_GLOBAL_PATH)/bin/npm
+NPM_GLOBAL_PATH       = $(shell realpath $(shell dirname $(shell which node))/../)
+NVM                   = $(HOME)/emacs/exec-nvm
+NPM                   = $(HOME)/emacs/exec-npm
 TERN_PLUG_DIR         = $(NPM_GLOBAL_PATH)/lib/node_modules/tern/plugin
 # 86 or 64
 ARCH                  = 64
@@ -43,15 +44,14 @@ export BASH_INLUDE
 define PROFILE_EXTRA
 #!/bin/bash
 #Setup env
-if [ -d "$(NPM_GLOBAL_PATH)/bin" ] ; then
-	PATH="$(NPM_GLOBAL_PATH)/bin:$$PATH"
-	NODE_PATH="$(NPM_GLOBAL_PATH)/lib/node_modules:$$NODE_PATH"
-  fi
-
 if [ -x "/usr/share/source-highlight/src-hilite-lesspipe.sh" ]; then
 	export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 	export LESS=' -R '
 fi
+
+export NVM_DIR="/home/olexandr/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
 endef
 
 export PROFILE_EXTRA
