@@ -1,0 +1,8 @@
+#!/bin/bash
+# This script eval nvm ENVIRONMENT and start emacs
+# This help tern.js work well
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+emacs $@

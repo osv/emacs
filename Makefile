@@ -26,7 +26,7 @@ help:
 	@echo
 	@echo 'For update yout profile type "make setup-profile"'
 	@echo
-	@echo ''
+	@echo 'To start emacs from DWM better use ~/emacs/exec-emacs that allow you run tern.js, etc in emacs'
 
 nvm: ~/.nvm/nvm.sh
 	@$(PRINT_OK)
