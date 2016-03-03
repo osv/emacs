@@ -72,9 +72,28 @@
 
 (define-key web-mode-map (kbd "C-c C-v") 'browse-url-of-buffer)
 
-(setq web-mode-enable-comment-keywords t)
-(setq web-mode-enable-block-face 't)
-(setq web-mode-enable-part-face t)
+
+(setq-default
+ ;; web-mode-enable-auto-pairing t
+ ;; web-mode-enable-auto-opening t
+ ;; web-mode-enable-auto-indentation t
+ web-mode-enable-block-face t
+ web-mode-enable-part-face t
+ web-mode-enable-comment-keywords t
+ ;; web-mode-enable-css-colorization t
+ web-mode-enable-current-element-highlight t
+ ;; web-mode-enable-heredoc-fontification t
+ ;; web-mode-enable-engine-detection t
+
+ ;; web-mode-markup-indent-offset 2
+ ;; web-mode-css-indent-offset 2
+ ;; web-mode-code-indent-offset 2
+
+ ;; web-mode-style-padding 2
+ ;; web-mode-script-padding 2
+ ;; web-mode-block-padding 0
+ ;; web-mode-comment-style 2
+ )
 
 ;; http://blog.binchen.org/posts/how-to-use-flyspell-in-web-mode.html
 (defun web-mode-flyspefll-verify ()
