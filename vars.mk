@@ -49,8 +49,9 @@ if [ -x "/usr/share/source-highlight/src-hilite-lesspipe.sh" ]; then
 	export LESS=' -R '
 fi
 
-export NVM_DIR="/home/olexandr/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# For now I don't need it, I have bash for it. Maybe later
+#export NVM_DIR="/home/olexandr/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 endef
 
