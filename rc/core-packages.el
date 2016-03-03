@@ -44,10 +44,12 @@
     cg
     coffee-mode
     company
+    company-dict
     company-tern
     company-shell
     company-statistics
     company-restclient
+    company-try-hard
     css-eldoc
     crontab-mode
     dash
