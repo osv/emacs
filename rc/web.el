@@ -45,7 +45,6 @@
 
 (setq web-mode-engines-alist
       '(("mojolicious" . "\\.html.ep")
-        ("dust" . "\\.tag")
         ("angular" . "\\.html")))
 
 (add-to-list 'web-mode-engine-attr-regexps
