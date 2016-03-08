@@ -8,6 +8,11 @@
 ;; ;;(setq org-agenda-files (find-lisp-find-files "~/org" "\.org"))
 ;; (setq org-log-done t)
 
+(setq org-agenda-files (list "~/org/todo.org"
+			     ;; have problem with diary "~/org/date.org"
+ 			     ;;"~/org/home.org"
+                             ))
+
 (setq org-agenda-custom-commands
       '(("e" tags-todo "emacs" nil)
         ("w" tags-todo "Write/TODO" nil)
