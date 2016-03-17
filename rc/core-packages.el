@@ -114,6 +114,8 @@
 ;;    register-channel
     simple-httpd
     slime
+    string-inflection
+    sudo-edit
     smartparens
     sos
     tern
@@ -123,6 +125,7 @@
 ;;    wanderlust
     web-beautify
     web-mode
+    wttrin                              ; wheather
     window-numbering
     yaml-mode
     yaml-tomato
@@ -143,6 +146,7 @@
 
 (defvar my--ignore-list
   '(
+    xterm-color
     helm-core
     json-snatcher
     let-alist
