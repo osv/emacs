@@ -59,6 +59,7 @@ apt-utils: apt-update
 	sudo apt-get install -y iptraf \
 				screen \
 				pwgen \
+				pngquant \
 				source-highlight
 	@$(PRINT_OK)
 
