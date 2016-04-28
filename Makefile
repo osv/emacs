@@ -31,6 +31,7 @@ help:
 info:
 	@echo "Cheatsheat:"
 	@echo "iotop -aoP    Show accumulated stat"
+	@echo " docker --net=host problem. See https://github.com/docker/docker/issues/13914 "
 nvm: ~/.nvm/nvm.sh
 	@$(PRINT_OK)
 	@echo
