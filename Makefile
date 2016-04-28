@@ -28,6 +28,9 @@ help:
 	@echo
 	@echo 'To start emacs from DWM better use ~/emacs/exec-emacs that allow you run tern.js, etc in emacs'
 
+info:
+	@echo "Cheatsheat:"
+	@echo "iotop -aoP    Show accumulated stat"
 nvm: ~/.nvm/nvm.sh
 	@$(PRINT_OK)
 	@echo
@@ -57,8 +60,11 @@ apt-make:
 
 apt-utils: apt-update
 	sudo apt-get install -y iptraf \
+				iotop \
+				dstat \
 				screen \
 				pwgen \
+				pngquant \
 				source-highlight
 	@$(PRINT_OK)
 

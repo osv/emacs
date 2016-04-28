@@ -172,6 +172,13 @@
 
 (css-eldoc-enable)
 
+(defun css-complete-hook ()
+  (local-set-key (kbd "M-SPC") 'company-css)
+  (set (make-local-variable 'company-backends)
+       '(company-css company-yasnippet company-files)))
+
+(add-hook  'less-mode-hook 'css-complete-hook)
+(add-hook  'scss-mode-hook 'css-complete-hook)
 ;; cool selector
 ;; `helm-css-scss-multi' use it to select
 

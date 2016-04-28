@@ -23,6 +23,11 @@
 (require 'rainbow-mode)
 (diminish 'rainbow-mode)
 
+(global-set-key (kbd "M-S-<right>") 'string-inflection-all-cycle)
+(global-set-key (kbd "M-S-<up>") 'string-inflection-camelcase)
+(global-set-key (kbd "M-S-<down>") 'string-inflection-lower-camelcase)
+(global-set-key (kbd "M-S-<left>") 'string-inflection-lisp)
+
 (setq browse-url-browser-function 'browse-url-firefox
       browse-url-new-window-flag  t
       browse-url-firefox-new-window-is-tab t)

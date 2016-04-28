@@ -8,3 +8,6 @@
  (load "~/emacs/rc/company-completion.el")
 ;; (load "~/emacs/rc/helm.el")
  (load "~/emacs/pmade/emacs.d/pmade-colors.el")
+
+(add-to-list 'auto-mode-alist '("git-rebase-todo" . conf-mode))
+(add-to-list 'auto-mode-alist '("COMMIT_EDITMSG" . conf-mode))
