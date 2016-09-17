@@ -53,10 +53,14 @@
                            1 font-lock-warning-face t)))
 
 (add-hook 'js2-mode-hook
-          (lambda () (flycheck-mode t)))
+          (lambda ()
+            (digit-groups-mode t)
+            (flycheck-mode t)))
 
 (add-hook 'json-mode-hook
-          (lambda () (flycheck-mode t)))
+          (lambda ()
+            (digit-groups-mode t)
+            (flycheck-mode t)))
 
 ;; better use tern
 ;; ;; M-/ complete

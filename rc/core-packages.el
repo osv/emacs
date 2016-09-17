@@ -53,6 +53,7 @@
     css-eldoc
     crontab-mode
     dash
+    digit-groups
     diminish
     dired-hacks-utils
     dired-rainbow
@@ -102,7 +103,6 @@
     nginx-mode
     volatile-highlights
     org-pomodoro
-    org-screenshot
     php-mode
     plsense
     plsense-direx
