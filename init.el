@@ -36,4 +36,4 @@
 
 (load "~/emacs/rc/orgmode.el")
 
-(load "~/emacs/pmade/emacs.d/pmade-colors.el")
+;;(load "~/emacs/pmade/emacs.d/pmade-colors.el")

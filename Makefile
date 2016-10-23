@@ -138,14 +138,15 @@ node-lint:
 			less
 	@$(PRINT_OK)
 
+# other fix-gaze
 node-extra:
 	$(NPM) install -g bower \
 			grunt-cli \
 			gulp \
-			fix-gaze \
 			http-server \
 			mongo-hacker \
 			chokidar-cli \
+			flow-bin \
 			tern
 
 	@$(PRINT_OK)

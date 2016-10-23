@@ -1,4 +1,4 @@
-NODE_VERSION          = v5.6.0
+NODE_VERSION          = v6.9.1
 CHECK_PROFILE_EXTRA   = $(shell grep 'HOME/.profile-extra' ~/.profile)
 CHECK_BASH_EXTRA      = $(shell grep 'HOME/.bash-extra' ~/.bashrc)
 CHECK_XDEFAULTS_EXTRA = $(shell grep '^\s*\#include ".Xdefaults-extra"' ~/.Xdefaults)

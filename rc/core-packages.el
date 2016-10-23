@@ -45,6 +45,7 @@
     coffee-mode
     company
     company-dict
+    company-flow                        ; js autocomple
     company-tern
     company-shell
     company-statistics
