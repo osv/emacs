@@ -1,4 +1,4 @@
- include vars.mk
+include vars.mk
 
 help:
 	@echo "                Bootstrap Emacs environment"
@@ -120,9 +120,13 @@ endif
 	@$(PRINT_OK)
 
 node-tern:
-	curl https://raw.githubusercontent.com/Slava/tern-meteor/master/meteor.js > /tmp/meteor.js
-	@mkdir -p ${TERN_PLUG_DIR}
-	cp /tmp/meteor.js ${TERN_PLUG_DIR}
+	$(NPM) install -g \
+			tern-jasmine \
+			tern-jasminematchers \
+			tern-browser-extension \
+			tern-jquery-extension \
+			tern-meteor \
+			tern-jsx
 	@$(PRINT_OK)
 
 node-lint:
