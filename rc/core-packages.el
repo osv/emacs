@@ -15,7 +15,8 @@
     autumn-light-theme
     atom-dark-theme
     grandshell-theme
-    
+    gotham-theme
+
     org
 
     ac-etags
@@ -94,6 +95,7 @@
     js-doc
     js2-refactor
     js2-highlight-vars
+    rjsx-mode
     json-mode
     json-reformat
     lua-mode
