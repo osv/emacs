@@ -72,7 +72,7 @@
             (lambda ()
               (tern-mode)
               (idle-highlight-mode t)
-              ;;(js2-highlight-vars-mode t)
+              (js2-highlight-vars-mode t)
               (set (make-local-variable 'company-backends) '(company-tern company-files company-yasnippet))))
 (define-key js2-mode-map (kbd "M-SPC") 'company-tern)
 (define-key js2-mode-map (kbd "C-;") 'company-flow)
