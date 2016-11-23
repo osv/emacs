@@ -151,7 +151,9 @@ node-extra:
 			mongo-hacker \
 			chokidar-cli \
 			flow-bin \
-			tern
+			tern \
+			elm \
+			elm-oracle
 
 	@$(PRINT_OK)
 

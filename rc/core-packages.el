@@ -68,6 +68,7 @@
     egg
     expand-region
     erlang
+    elm-mode
     feature-mode
     fireplace
     flim
@@ -75,6 +76,8 @@
     flx-ido
     flycheck
     flymake-easy
+    flycheck-elm
+    flycheck-flow
     glsl-mode
     go-mode
     google-translate
