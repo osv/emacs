@@ -97,7 +97,6 @@
     js2-mode
     js-doc
     js2-refactor
-    js2-highlight-vars
     rjsx-mode
     json-mode
     json-reformat
