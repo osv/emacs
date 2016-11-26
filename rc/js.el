@@ -47,7 +47,6 @@
 ;;              (0 (progn (compose-region (match-beginning 1) (match-end 1) "ƒ")
 ;;                        nil)))))
 
-;place warning font around TODO and others
 (font-lock-add-keywords 'js2-mode
                         '(("\\<\\(FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\):"
                            1 font-lock-warning-face t)))
@@ -109,6 +108,24 @@
             compilation-error-regexp-alist-alist))
 (setq compilation-error-regexp-alist
       (cons 'jshint-cli compilation-error-regexp-alist))
+
+;; TypeScript
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  (company-mode +1))
+
+;; ;; formats the buffer before saving
+;; (add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+;; format options
+(setq tide-format-options '(:insertSpaceAfterFunctionKeywordForAnonymousFunctions t :placeOpenBraceOnNewLineForFunctions nil))
 
 (defun node-repl-comint-preoutput-filter (output)
   "This function fixes the escape issue with node-repl in js-comint.el.

@@ -125,6 +125,8 @@
     sos
     tern
     tern-auto-complete
+    tide
+    typescript-mode
     undo-tree
     w3m
 ;;    wanderlust
