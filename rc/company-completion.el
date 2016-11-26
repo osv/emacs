@@ -26,6 +26,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'company-backends 'company-shell)
 
+(add-to-list 'company-backends 'company-elisp)
+
 ;; Where to look for dictionary files. Default is ~/.emacs.d/dict
 (setq company-dict-dir "~/emacs/dicts/company-dict")
 
