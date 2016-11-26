@@ -71,7 +71,6 @@
   (sp-local-pair "<% " " %>" :insert "C-c %")
   (sp-local-pair "<%= " " %>" :insert "C-c =")
   (sp-local-pair "<%# " " %>" :insert "C-c #")
-  (sp-local-tag "%" "<% " " %>")
   (sp-local-tag "=" "<%= " " %>")
   (sp-local-tag "#" "<%# " " %>"))
 
