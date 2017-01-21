@@ -66,6 +66,7 @@ apt-utils: apt-update
 				screen \
 				pwgen \
 				pngquant \
+				silversearcher-ag \
 				source-highlight
 	@$(PRINT_OK)
 
