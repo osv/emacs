@@ -86,6 +86,7 @@ apt-desktop: apt-update
 				mc \
 				kbdd \
 				eog \
+				ristretto \
 				xscreensaver
 	@$(PRINT_OK)
 
