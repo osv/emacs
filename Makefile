@@ -114,6 +114,10 @@ install-node:
 	$(NVM) install $(NODE_VERSION)
 	$(NVM) use $(NODE_VERSION)
 
+fish:
+	sudo apt-get install fish
+	curl -L https://get.oh-my.fish | fish
+
 setup-profile: bash-git-prompt bash-extra xdefault-extra
 	echo "$$PROFILE_EXTRA" > ~/.profile-extra
 ifeq ($(CHECK_PROFILE_EXTRA),)
