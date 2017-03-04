@@ -15,7 +15,7 @@ help:
 	@echo
 	@echo "    make apt-desktop apt-xmonad"
 	@echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-	@echo "  setup-profile - bash-git-prompt, bash profile, .profile-extra, .Xdefault-Extra"
+	@echo "  setup-profile - fish shell, bash-git-prompt, bash profile, .profile-extra, .Xdefault-Extra"
 	@echo "  apt - build-essential, pwgen, screen, iptraf, source-highlight"
 	@echo "  node - nvm install and use node.js $(NODE_VERSION)"
 	@echo "  node-lint - varios lint tools that required by flycheck-mode.el"
@@ -54,6 +54,7 @@ apt: apt-update apt-make apt-utils
 apt-make:
 	sudo apt-get install -y build-essential \
 				curl \
+				autoconf \
 				cmake
 # dependencies for editorconf
 	sudo apt-get install -y libpcre3 libpcre3-dev
@@ -114,11 +115,25 @@ install-node:
 	$(NVM) install $(NODE_VERSION)
 	$(NVM) use $(NODE_VERSION)
 
-fish:
-	sudo apt-get install fish
-	curl -L https://get.oh-my.fish | fish
+fish: fish-install fish-fisherman fish-set-config
+	@$(PRINT_OK)
 
-setup-profile: bash-git-prompt bash-extra xdefault-extra
+fish-set-config:
+	ln -s ~/emacs/config.fish ~/.config/fish
+fish-install:
+	-git clone --depth 1 --branch ${FISH_VERSION} https://github.com/fish-shell/fish-shell /tmp/fish-shell
+	(cd /tmp/fish-shell && autoreconf --no-recursive)
+	(cd /tmp/fish-shell && ./configure)
+	(cd /tmp/fish-shell && make)
+	(cd /tmp/fish-shell && sudo make install)
+	@$(PRINT_OK)
+
+fish-fisherman:
+	curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
+	-fish -c 'fisher edc/bass brgmnn/fish-docker-compose last_job_id humanize_duration'
+	@$(PRINT_OK)
+
+setup-profile: fish bash-git-prompt bash-extra xdefault-extra
 	echo "$$PROFILE_EXTRA" > ~/.profile-extra
 ifeq ($(CHECK_PROFILE_EXTRA),)
 	echo "$$PROFILE_INLUDE" >> ~/.profile
@@ -203,6 +218,9 @@ ifeq ($(CHECK_BASH_EXTRA),)
 	echo "$$BASH_INLUDE" >> ~/.bashrc
 endif
 	@$(PRINT_OK)
+
+haskell:
+	curl -sSL https://get.haskellstack.org/ | sh
 
 xdefault-extra:
 	@cp -v .Xdefaults-extra ~/
