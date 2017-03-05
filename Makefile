@@ -105,7 +105,7 @@ editorconfig:
 	@rm -rf /tmp/editorconfig-build
 	git clone https://github.com/editorconfig/editorconfig-core-c /tmp/editorconfig-build
 # I test 0.12.1-development and it ok
-	(cd /tmp/editorconfig-build && cmake . && make && sudo make install)
+	(cd /tmp/editorconfig-build && cmake . && make -j ${MAKE_JOBS} && sudo make install)
 	@$(PRINT_OK)
 
 node: install-node
@@ -124,7 +124,7 @@ fish-install:
 	-git clone --depth 1 --branch ${FISH_VERSION} https://github.com/fish-shell/fish-shell /tmp/fish-shell
 	(cd /tmp/fish-shell && autoreconf --no-recursive)
 	(cd /tmp/fish-shell && ./configure)
-	(cd /tmp/fish-shell && make)
+	(cd /tmp/fish-shell && make -j ${MAKE_JOBS})
 	(cd /tmp/fish-shell && sudo make install)
 	@$(PRINT_OK)
 
