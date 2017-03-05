@@ -1,4 +1,4 @@
-FISH_VERSION          = 2.5.0
+FISH_VERSION          = master # 2.5.0
 NODE_VERSION          = v6.9.1
 CHECK_PROFILE_EXTRA   = $(shell grep 'HOME/.profile-extra' ~/.profile)
 CHECK_BASH_EXTRA      = $(shell grep 'HOME/.bash-extra' ~/.bashrc)
