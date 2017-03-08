@@ -69,6 +69,8 @@ function fish_right_prompt
     end
 end
 
+alias e='exa -ghl --git'
+alias eee='exa -ghl --git'
 
 alias l='ls -lah'
 

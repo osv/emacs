@@ -115,6 +115,10 @@ install-node:
 	$(NVM) install $(NODE_VERSION)
 	$(NVM) use $(NODE_VERSION)
 
+exa:
+	wget -O /tmp/exa.zip https://github.com/ogham/exa/releases/download/v${EXA_LS_VERSION}/exa-linux-x86_64.zip
+	(cd /tmp && unzip /tmp/exa.zip && sudo cp -v /tmp/exa-linux-x86_64 /usr/local/bin/exa)
+
 fish: fish-install fish-fisherman fish-set-config
 	@$(PRINT_OK)
 
