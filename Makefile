@@ -15,7 +15,8 @@ help:
 	@echo
 	@echo "    make apt-desktop apt-xmonad"
 	@echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-	@echo "  setup-profile - fish shell, bash-git-prompt, bash profile, .profile-extra, .Xdefault-Extra"
+	@echo "  setup-profile - bash-git-prompt, bash profile, .profile-extra, .Xdefault-Extra"
+	@echo "  hipster-tools - fish shell, exa"
 	@echo "  apt - build-essential, pwgen, screen, iptraf, source-highlight"
 	@echo "  node - nvm install and use node.js $(NODE_VERSION)"
 	@echo "  node-lint - varios lint tools that required by flycheck-mode.el"
@@ -43,7 +44,10 @@ nvm: ~/.nvm/nvm.sh
 ~/.nvm/nvm.sh:
 	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
 
-all: setup-profile apt node node-extra node-lint cpan node-tern editorconfig
+all: setup-profile hipster-tools apt node node-extra node-lint cpan node-tern editorconfig
+	@$(PRINT_OK)
+
+hipster-tools: exa fish
 	@$(PRINT_OK)
 
 # main targers
@@ -114,16 +118,19 @@ node: install-node
 install-node:
 	$(NVM) install $(NODE_VERSION)
 	$(NVM) use $(NODE_VERSION)
+	@$(PRINT_OK)
 
 exa:
 	wget -O /tmp/exa.zip https://github.com/ogham/exa/releases/download/v${EXA_LS_VERSION}/exa-linux-x86_64.zip
 	(cd /tmp && unzip /tmp/exa.zip && sudo cp -v /tmp/exa-linux-x86_64 /usr/local/bin/exa)
+	@$(PRINT_OK)
 
 fish: fish-install fish-fisherman fish-set-config
 	@$(PRINT_OK)
 
 fish-set-config:
 	ln -s ~/emacs/config.fish ~/.config/fish
+	@$(PRINT_OK)
 fish-install:
 	-git clone --depth 1 --branch ${FISH_VERSION} https://github.com/fish-shell/fish-shell /tmp/fish-shell
 	(cd /tmp/fish-shell && autoreconf --no-recursive)
@@ -137,7 +144,7 @@ fish-fisherman:
 	-fish -c 'fisher edc/bass brgmnn/fish-docker-compose last_job_id humanize_duration'
 	@$(PRINT_OK)
 
-setup-profile: fish bash-git-prompt bash-extra xdefault-extra
+setup-profile: bash-git-prompt bash-extra xdefault-extra
 	echo "$$PROFILE_EXTRA" > ~/.profile-extra
 ifeq ($(CHECK_PROFILE_EXTRA),)
 	echo "$$PROFILE_INLUDE" >> ~/.profile
