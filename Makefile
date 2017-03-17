@@ -16,7 +16,8 @@ help:
 	@echo "    make apt-desktop apt-xmonad"
 	@echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 	@echo "  setup-profile - bash-git-prompt, bash profile, .profile-extra, .Xdefault-Extra"
-	@echo "  hipster-tools - fish shell, exa"
+	@echo "  hipster-tools - exa"
+	@echo "  fish - fish shell"
 	@echo "  apt - build-essential, pwgen, screen, iptraf, source-highlight"
 	@echo "  node - nvm install and use node.js $(NODE_VERSION)"
 	@echo "  node-lint - varios lint tools that required by flycheck-mode.el"
@@ -47,7 +48,7 @@ nvm: ~/.nvm/nvm.sh
 all: setup-profile hipster-tools apt node node-extra node-lint cpan node-tern editorconfig
 	@$(PRINT_OK)
 
-hipster-tools: exa fish
+hipster-tools: exa
 	@$(PRINT_OK)
 
 # main targers
