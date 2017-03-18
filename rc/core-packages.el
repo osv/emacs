@@ -113,6 +113,7 @@
     plsense-direx
     popup
     projectile
+    project-shells
     rainbow-mode
     restclient
     region-state

@@ -74,6 +74,7 @@ values."
      string-inflection
      dired-rainbow
      pomidor
+     project-shells
      egg
      )
    ;; A list of packages that cannot be updated.
