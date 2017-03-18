@@ -45,7 +45,7 @@ nvm: ~/.nvm/nvm.sh
 ~/.nvm/nvm.sh:
 	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
 
-all: setup-profile hipster-tools apt node node-extra node-lint cpan node-tern editorconfig
+all: setup-profile spacemacs hipster-tools apt node node-extra node-lint cpan node-tern editorconfig
 	@$(PRINT_OK)
 
 hipster-tools: exa
@@ -54,25 +54,18 @@ hipster-tools: exa
 # main targers
 
 spacemacs:
-ifneq ($(wildcard ~/.emacs.d/.),)
-	    @echo "Make copy of your ~/.emacs.d and ~/.emacs first"
-			@read -p "Press enter to retry " r
-endif
-ifneq ($(wildcard ~/.emacs.d/.),)
-			@echo "Dir ~/.emacs.d still exist!"
-	    @echo "Make copy of your ~/.emacs.d and ~/.emacs first"
-			@echo "Aborting"
-			@false
-endif
-ifneq ($(wildcard ~/.emacs), "")
-			@echo "File ~/.emacs still exist!"
-	    @echo "Make copy of your ~/.emacs.d and ~/.emacs first"
-			@echo "Aborting"
-			@false
-endif
+	@echo "Make copy of your ~/.emacs.d and ~/.emacs"
+	@while [ -e ~/.emacs ]; do \
+	    read -p "File ~/.emacs still exist. Backup it and press enter to continue " r; \
+	done
+	@while [ -e ~/.emacs.d ]; do \
+	    read -p "File ~/.emacs.d still exist. Backup it and press enter to continue " r; \
+	done
+
 	ln -s ~/emacs/.spacemacs ~/.spacemacs
-# git clone --depth 1 https://github.com/syl20bnr/spacemacs ~/.emacs.d
+	git clone --depth 1 https://github.com/syl20bnr/spacemacs ~/.emacs.d
 	@$(PRINT_OK)
+
 apt: apt-update apt-make apt-utils
 	@$(PRINT_OK)
 
