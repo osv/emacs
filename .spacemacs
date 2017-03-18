@@ -429,6 +429,9 @@ you should place your code here."
   (global-set-key [C-f5] 'dired-jump)
   (global-set-key (kbd "C-c p C-s") 'helm-projectile-ag)
 
+  (global-set-key [f5] 'project-explorer-open)
+
+  (global-set-key [f9] 'pomidor)
   (setq pomidor-sound-tick nil
         pomidor-sound-tack nil
         ;; pomidor-sound-overworknil
