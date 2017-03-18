@@ -75,6 +75,7 @@ values."
      dired-rainbow
      pomidor
      project-shells
+     project-explorer
      egg
      )
    ;; A list of packages that cannot be updated.
@@ -471,8 +472,9 @@ you should place your code here."
  '(evil-want-Y-yank-to-eol nil)
  '(helm-autoresize-max-height 100)
  '(magit-diff-refine-hunk (quote all))
- '(neo-show-updir-line t t)
- '(neo-vc-integration (quote (face char)) t))
+ '(neo-show-updir-line t)
+ '(neo-vc-integration (quote (face char)))
+ '(paradox-github-token t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

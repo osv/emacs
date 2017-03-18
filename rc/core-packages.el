@@ -114,6 +114,7 @@
     popup
     projectile
     project-shells
+    project-explorer
     rainbow-mode
     restclient
     region-state

@@ -13,9 +13,10 @@ help:
 	@echo
 	@echo "and additionally you can:"
 	@echo
-	@echo "    make apt-desktop apt-xmonad"
+	@echo "    make apt-desktop apt-xmonad spacemacs"
 	@echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 	@echo "  setup-profile - bash-git-prompt, bash profile, .profile-extra, .Xdefault-Extra"
+	@echo "  spacemacs - setup spacemacs dotfile and install spacemasc"
 	@echo "  hipster-tools - exa"
 	@echo "  fish - fish shell"
 	@echo "  apt - build-essential, pwgen, screen, iptraf, source-highlight"
@@ -45,7 +46,7 @@ nvm: ~/.nvm/nvm.sh
 ~/.nvm/nvm.sh:
 	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
 
-all: setup-profile spacemacs hipster-tools apt node node-extra node-lint cpan node-tern editorconfig
+all: setup-profile hipster-tools apt node node-extra node-lint cpan node-tern editorconfig
 	@$(PRINT_OK)
 
 hipster-tools: exa
