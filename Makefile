@@ -53,6 +53,26 @@ hipster-tools: exa
 
 # main targers
 
+spacemacs:
+ifneq ($(wildcard ~/.emacs.d/.),)
+	    @echo "Make copy of your ~/.emacs.d and ~/.emacs first"
+			@read -p "Press enter to retry " r
+endif
+ifneq ($(wildcard ~/.emacs.d/.),)
+			@echo "Dir ~/.emacs.d still exist!"
+	    @echo "Make copy of your ~/.emacs.d and ~/.emacs first"
+			@echo "Aborting"
+			@false
+endif
+ifneq ($(wildcard ~/.emacs), "")
+			@echo "File ~/.emacs still exist!"
+	    @echo "Make copy of your ~/.emacs.d and ~/.emacs first"
+			@echo "Aborting"
+			@false
+endif
+	ln -s ~/emacs/.spacemacs ~/.spacemacs
+# git clone --depth 1 https://github.com/syl20bnr/spacemacs ~/.emacs.d
+	@$(PRINT_OK)
 apt: apt-update apt-make apt-utils
 	@$(PRINT_OK)
 
