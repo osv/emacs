@@ -31,6 +31,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     restclient
+     typescript
      shell-scripts
      sql
      docker
@@ -432,6 +434,8 @@ you should place your code here."
   (global-set-key [f5] 'project-explorer-open)
 
   (global-set-key [f9] 'pomidor)
+  (global-set-key [f11] 'flycheck-mode)
+
   (setq pomidor-sound-tick nil
         pomidor-sound-tack nil
         ;; pomidor-sound-overworknil
