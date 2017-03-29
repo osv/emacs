@@ -69,6 +69,27 @@ function fish_right_prompt
     end
 end
 
+function man --description "wrap the 'man' manual page opener to use color in formatting"
+  # # start of bold:
+  # set -x LESS_TERMCAP_md (printf "\e[1;31m")
+  # # end of all formatting:
+  # set -x LESS_TERMCAP_me (printf "\e[0m")
+
+  # # start of standout (inverted):
+  # set -x LESS_TERMCAP_so (printf "\e[1;40;92m")
+  # # end of standout (inverted):
+  # set -x LESS_TERMCAP_se (printf "\e[0m")
+  # # (no change – I like the default)
+
+  # start of underline:
+  set -x LESS_TERMCAP_us (printf "\e[1;32m")
+  # end of underline:
+  set -x LESS_TERMCAP_ue (printf "\e[0m")
+  # (no change – I like the default)
+
+  env man $argv
+end
+
 alias e='exa -ghl --git'
 alias eee='exa -ghl --git'
 
