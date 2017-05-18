@@ -385,6 +385,12 @@ you should place your code here."
   (which-function-mode t)
   (editorconfig-mode 1)
 
+  ;; https://github.com/syl20bnr/spacemacs/issues/3828
+  (add-hook 'change-major-mode-after-body-hook
+            (lambda ()
+              (when (> (buffer-size) 80000)
+                (turn-off-show-smartparens-mode))))
+
   (global-set-key (kbd "\C-z") 'undo)
 
   (global-set-key [C-f4] 'next-error) ;; C-x `
