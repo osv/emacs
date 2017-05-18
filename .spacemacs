@@ -31,6 +31,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     purescript
+     yaml
      restclient
      typescript
      shell-scripts
@@ -69,6 +71,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     wgrep
      nginx-mode
      crontab-mode
      editorconfig
@@ -485,8 +488,8 @@ you should place your code here."
  '(evil-want-Y-yank-to-eol nil)
  '(helm-autoresize-max-height 100)
  '(magit-diff-refine-hunk (quote all))
- '(neo-show-updir-line t)
- '(neo-vc-integration (quote (face char)))
+ '(neo-show-updir-line t t)
+ '(neo-vc-integration (quote (face char)) t)
  '(paradox-github-token t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
