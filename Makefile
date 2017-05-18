@@ -46,7 +46,7 @@ nvm: ~/.nvm/nvm.sh
 ~/.nvm/nvm.sh:
 	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
 
-all: setup-profile hipster-tools apt node node-extra node-lint cpan node-tern editorconfig
+all: setup-profile hipster-tools apt node node-extra node-lint node-tern editorconfig docker-compose cpan
 	@$(PRINT_OK)
 
 hipster-tools: exa
@@ -114,6 +114,11 @@ apt-xmonad:
 	sudo apt-get install -y xmonad \
 				dzen2 \
 				conky
+	@$(PRINT_OK)
+
+docker-compose:
+	curl -L https://github.com/docker/compose/releases/download/1.6.2/docker-compose-`uname -s`-`uname -m` | sudo tee /usr/local/bin/docker-compose > /dev/null
+	sudo chmod +x /usr/local/bin/docker-compose
 	@$(PRINT_OK)
 
 editorconfig:
