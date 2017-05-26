@@ -25,6 +25,7 @@ help:
 	@echo "  node-extra - tern.js gulp, bower, mongohacker, etc"
 	@echo "  node-tern - some tern.js plugins"
 	@echo "  cpan - csswatcher ack perlcompletion perltidy"
+	@echo "  unison"
 	@echo "  editorconfig - download and install libeditorconfig from source"
 	@echo
 	@echo 'For update yout profile type "make setup-profile"'
@@ -73,6 +74,7 @@ apt: apt-update apt-make apt-utils
 apt-make:
 	sudo apt-get install -y build-essential \
 				curl \
+				wget \
 				autoconf \
 				cmake
 # dependencies for editorconf
@@ -197,6 +199,7 @@ node-lint:
 # other fix-gaze
 node-extra:
 	$(NPM) install -g bower \
+			@angular/cli \
 			grunt-cli \
 			gulp \
 			http-server \
@@ -258,6 +261,11 @@ xdefault-extra:
 ifeq ($(CHECK_XDEFAULTS_EXTRA),)
 	echo "$$XDEFAULTS_INLUDE" >> ~/.Xdefaults
 endif
+	@$(PRINT_OK)
+
+unison:
+	wget -O /tmp/unison-gtk_2.40.102-2ubuntu1_amd64.deb http://mirrors.kernel.org/ubuntu/pool/universe/u/unison/unison-gtk_2.40.102-2ubuntu1_amd64.deb
+	sudo dpkg --install /tmp/unison-gtk_2.40.102-2ubuntu1_amd64.deb
 	@$(PRINT_OK)
 
 clean:
