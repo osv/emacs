@@ -379,7 +379,7 @@ you should place your code here."
         '(".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" ".tox"
           ".svn" "build" "vendor" "cms/ext" "cms/Sencha"
           "coverage" "closure-library" "public" "node_modules" "bower_components" ".idea" "_project"
-          ".meteor/local" "build" ".tmp" "core"))
+          ".meteor/local" "build" ".tmp"))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; etc
