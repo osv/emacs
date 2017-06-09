@@ -36,6 +36,7 @@ info:
 	@echo "Cheatsheat:"
 	@echo "iotop -aoP    Show accumulated stat"
 	@echo " docker --net=host problem. See https://github.com/docker/docker/issues/13914 "
+
 nvm: ~/.nvm/nvm.sh
 	@$(PRINT_OK)
 	@echo
@@ -153,6 +154,7 @@ fish: fish-install fish-fisherman fish-set-config
 fish-set-config:
 	ln -s ~/emacs/config.fish ~/.config/fish
 	@$(PRINT_OK)
+
 fish-install:
 	-git clone --depth 1 --branch ${FISH_VERSION} https://github.com/fish-shell/fish-shell /tmp/fish-shell
 	(cd /tmp/fish-shell && autoreconf --no-recursive)
@@ -204,7 +206,7 @@ node-extra:
 			gulp \
 			http-server \
 			mongo-hacker \
-			chokidar-cli \
+			nodemon \
 			flow-bin \
 			tern \
 			elm \
