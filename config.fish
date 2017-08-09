@@ -92,8 +92,8 @@ end
 
 alias e='exa -ghl --git'
 alias eee='exa -ghl --git'
-
 alias l='ls -lah'
+alias git-who='git shortlog -s -n --all --no-merges'
 
 alias ...='cd ../..'
 alias ....='cd ../../..'
