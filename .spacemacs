@@ -31,6 +31,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     php
+     elm
      purescript
      yaml
      restclient
@@ -50,8 +52,8 @@ values."
      helm
      (auto-completion :variables
                       auto-completion-enable-help-tooltip nil
-                      auto-completion-tab-key-behavior 'complete
-                      ;;auto-completion-return-key-behavior nil
+                      auto-completion-tab-key-behavior nil
+                      auto-completion-return-key-behavior nil
                       auto-completion-enable-snippets-in-popup t)
      ;; better-defaults
      emacs-lisp
@@ -423,19 +425,19 @@ you should place your code here."
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; dired
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (require 'dired-rainbow)
-  (dired-rainbow-define webhtml "#aaf" ("htm" "html" "xhtml"))
-  (dired-rainbow-define web "#77f" ("css" "less"))
-  (dired-rainbow-define media "#ce5c00" ("mp3" "mp4" "MP3" "MP4" "avi" "mpg" "flv" "ogg"))
-  (dired-rainbow-define junk "#333" ("hi" "o" "hs1"))
-  (dired-rainbow-define source  "#cf5" ("hs" "pl" "js" "el"))
+  ;; (require 'dired-rainbow)
+  ;; (dired-rainbow-define webhtml "#aaf" ("htm" "html" "xhtml"))
+  ;; (dired-rainbow-define web "#77f" ("css" "less"))
+  ;; (dired-rainbow-define media "#ce5c00" ("mp3" "mp4" "MP3" "MP4" "avi" "mpg" "flv" "ogg"))
+  ;; (dired-rainbow-define junk "#333" ("hi" "o" "hs1"))
+  ;; (dired-rainbow-define source  "#cf5" ("hs" "pl" "js" "el"))
 
-                                        ; boring regexp due to lack of imagination
-  (dired-rainbow-define log (:inherit default
-                                      :italic t) ".*\\.log")
+  ;;                                       ; boring regexp due to lack of imagination
+  ;; (dired-rainbow-define log (:inherit default
+  ;;                                     :italic t) ".*\\.log")
 
-                                        ; highlight executable files, but not directories
-  (dired-rainbow-define-chmod executable-unix "green" "-.*x.*")
+  ;;                                       ; highlight executable files, but not directories
+  ;; (dired-rainbow-define-chmod executable-unix "green" "-.*x.*")
 
   (global-set-key [C-f5] 'dired-jump)
   (global-set-key (kbd "C-c p C-s") 'helm-projectile-ag)
