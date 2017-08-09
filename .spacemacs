@@ -399,6 +399,8 @@ you should place your code here."
   (global-set-key (kbd "\C-z") 'undo)
 
   (global-set-key [C-f4] 'next-error) ;; C-x `
+  ;; (define-key js2-mode-map [f4] 'js2-next-error)
+
   (global-set-key [S-f4] 'previous-error)
 
   ;; Add F12 to toggle line wrap
@@ -460,21 +462,113 @@ you should place your code here."
       (git-gutter+-toggle-fringe)
       (setq git-gutter+-modified-sign "=")))
 
+  (use-package web-mode
+    :config
+    (progn
+      (define-key web-mode-map (kbd "TAB") 'indent-for-tab-command)))
+
+  ;; http://blog.binchen.org/posts/how-to-use-flyspell-in-web-mode.html
+  (defun web-mode-flyspefll-verify ()
+    (let ((f (get-text-property (- (point) 1) 'face)))
+      (not (memq f '(web-mode-html-attr-value-face
+                     web-mode-html-tag-face
+                     web-mode-html-attr-name-face
+                     web-mode-doctype-face
+                     web-mode-keyword-face
+                     web-mode-function-name-face
+                     web-mode-variable-name-face
+                     web-mode-css-property-name-face
+                     web-mode-css-selector-face
+                     web-mode-css-color-face
+                     web-mode-type-face
+                     )
+                 ))))
+  (put 'web-mode 'flyspell-mode-predicate 'web-mode-flyspefll-verify)
+  (setq-default
+   ;; web-mode-enable-auto-pairing t
+   ;; web-mode-enable-auto-opening t
+   web-mode-enable-auto-quoting nil
+   ;; web-mode-enable-heredoc-fontification t
+   ;; web-mode-enable-engine-detection t
+
+   ;; web-mode-markup-indent-offset 2
+   ;; web-mode-css-indent-offset 2
+   ;; web-mode-code-indent-offset 2
+
+   ;; web-mode-style-padding 2
+   ;; web-mode-script-padding 2
+   ;; web-mode-block-padding 0
+   ;; web-mode-comment-style 2
+   )
+  (remove-hook 'web-mode-hook 'spacemacs/toggle-smartparens-off)
+
   (use-package editorconfig
     :config
     (progn
       (spacemacs|diminish editorconfig-mode)
       (editorconfig-mode 1)))
-  (use-package company
-    :config
-    (progn
-      (setq company-tooltip-align-annotations 't)          ; align annotations to the right tooltip border
-      (define-key company-mode-map (kbd "C-'") 'helm-company)
-      (define-key company-active-map (kbd "C-'") 'helm-company)
-      (global-set-key (kbd "C-c /") 'company-files)
-      (global-set-key (kbd "C-c ?") 'company-ispell)
-      (global-set-key (kbd "C-c SPC") 'company-tern)
-      (global-set-key (kbd "C-c M-SPC") 'company-try-hard)))
+
+  (smartparens-global-mode)
+  (global-company-mode)
+  (add-hook 'after-init-hook 'company-statistics-mode)
+  (setq company-idle-delay .3
+        company-dabbrev-downcase 'nil
+        company-tooltip-align-annotations 't)
+  (define-key company-mode-map (kbd "C-'") 'helm-company)
+  (define-key company-active-map (kbd "C-'") 'helm-company)
+  (global-set-key (kbd "C-c /") 'company-files)
+  (global-set-key (kbd "C-c ?") 'company-ispell)
+  (global-set-key (kbd "C-c SPC") 'company-tern)
+  (global-set-key (kbd "M-?") 'company-complete-common)
+
+  (setq yas-snippet-dirs (append '("~/emacs/dicts/snippets") yas-snippet-dirs ))
+
+  (setq ido-use-filename-at-point 'guess)
+
+  (global-set-key (kbd "M-p") 'flyspell-check-previous-highlighted-word)
+
+  (defun my/use-tslint-from-node-modules ()
+    (let* ((root (locate-dominating-file
+                  (or (buffer-file-name) default-directory)
+                  "node_modules"))
+           (tslint (and root
+                        (expand-file-name "node_modules/.bin/tslint"
+                                          root))))
+      (when (and tslint (file-executable-p tslint))
+        (setq-local flycheck-typescript-tslint-executable tslint))))
+
+  (add-hook 'flycheck-mode-hook #'my/use-tslint-from-node-modules)
+
+  ;; http://chopmo.blogspot.com/2008/09/quickly-jumping-to-symbols.html 
+  (defun ido-goto-symbol ()
+    "Will update the imenu index and then use ido to select a 
+   symbol to navigate to"
+    (interactive)
+    (imenu--make-index-alist)
+    (let ((name-and-pos '())
+          (symbol-names '()))
+      (flet ((addsymbols (symbol-list)
+                         (when (listp symbol-list)
+                           (dolist (symbol symbol-list)
+                             (let ((name nil) (position nil))
+                               (cond
+                                ((and (listp symbol) (imenu--subalist-p symbol))
+                                 (addsymbols symbol))
+                                ((listp symbol)
+                                 (setq name (car symbol))
+                                 (setq position (cdr symbol)))
+                                ((stringp symbol)
+                                 (setq name symbol)
+                                 (setq position (get-text-property 1 'org-imenu-marker symbol))))
+                               (unless (or (null position) (null name))
+                                 (add-to-list 'symbol-names name)
+                                 (add-to-list 'name-and-pos (cons name position))))))))
+        (addsymbols imenu--index-alist))
+      (let* ((selected-symbol (ido-completing-read "Symbol? " symbol-names))
+             (position (cdr (assoc selected-symbol name-and-pos))))
+        (goto-char position))))
+
+  (global-set-key (kbd "C-t") 'ido-goto-symbol) ; instead transpose-chars use complete symbol
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -486,13 +580,15 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
+    ("44c566df0e1dfddc60621711155b1be4665dd3520b290cb354f8270ca57f8788" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(evil-want-Y-yank-to-eol nil)
  '(helm-autoresize-max-height 100)
  '(magit-diff-refine-hunk (quote all))
  '(neo-show-updir-line t t)
  '(neo-vc-integration (quote (face char)) t)
- '(paradox-github-token t))
+ '(paradox-github-token t)
+ '(web-mode-script-padding 2)
+ '(web-mode-style-padding 2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
