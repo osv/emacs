@@ -165,7 +165,7 @@ fish-install:
 
 fish-fisherman:
 	curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
-	-fish -c 'fisher edc/bass brgmnn/fish-docker-compose last_job_id humanize_duration'
+	-fish -c 'fisher edc/bass docker-completion brgmnn/fish-docker-compose last_job_id humanize_duration'
 	@$(PRINT_OK)
 
 setup-profile: bash-git-prompt bash-extra xdefault-extra
