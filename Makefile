@@ -16,7 +16,7 @@ help:
 	@echo "    make apt-desktop apt-xmonad spacemacs"
 	@echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 	@echo "  setup-profile - bash-git-prompt, bash profile, .profile-extra, .Xdefault-Extra"
-	@echo "  spacemacs - setup spacemacs dotfile and install spacemasc"
+	@echo "  spacemacs - setup spacemacs dotfile and install spacemacs"
 	@echo "  hipster-tools - exa"
 	@echo "  fish - fish shell"
 	@echo "  apt - build-essential, pwgen, screen, iptraf, source-highlight"
@@ -44,6 +44,13 @@ nvm: ~/.nvm/nvm.sh
 	@echo "Also you may need run \"make setup-profile\" to setup your .profile"
 	@echo "that help use nvm's node (be cause your WM not source .bashrc)."
 
+.PHONY: help info nvm all hipster-tools spacemacs apt \
+				apt-make apt-utils apt-update apt-desktop apt-xmonad docker-compose \
+				editorconfig node install-node exa fish fish-install fish-fisherman \
+				setup-profile node-tern node-lint \
+				cpan cpan-csswatcher cpan-pde cpan-ack cpan-perlcompletion cpan-dev \
+				bash-git-prompt bash-extra haskell xdefault-extra unison clean
+
 # nvm install if not exist dir
 ~/.nvm/nvm.sh:
 	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
@@ -56,7 +63,9 @@ hipster-tools: exa
 
 # main targers
 
-spacemacs:
+spacemacs: ~/.spacemacs
+
+~/.spacemacs:
 	@echo "Make copy of your ~/.emacs.d and ~/.emacs"
 	@while [ -e ~/.emacs ]; do \
 	    read -p "File ~/.emacs still exist. Backup it and press enter to continue " r; \
@@ -90,6 +99,8 @@ apt-utils: apt-update
 				pwgen \
 				pngquant \
 				silversearcher-ag \
+				mycli \
+				pgcli \
 				source-highlight
 	@$(PRINT_OK)
 
@@ -148,10 +159,10 @@ exa:
 	(cd /tmp && unzip /tmp/exa.zip && sudo cp -v /tmp/exa-linux-x86_64 /usr/local/bin/exa)
 	@$(PRINT_OK)
 
-fish: fish-install fish-fisherman fish-set-config
+fish: fish-install fish-fisherman ~/.config/fish
 	@$(PRINT_OK)
 
-fish-set-config:
+~/.config/fish:
 	ln -s ~/emacs/config.fish ~/.config/fish
 	@$(PRINT_OK)
 
@@ -163,16 +174,22 @@ fish-install:
 	(cd /tmp/fish-shell && sudo make install)
 	@$(PRINT_OK)
 
-fish-fisherman:
+fish-fisherman: ~/.config/fish/functions/fisher.fish
+
+~/.config/fish/functions/fisher.fish:
 	curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
 	-fish -c 'fisher edc/bass docker-completion brgmnn/fish-docker-compose last_job_id humanize_duration'
 	@$(PRINT_OK)
 
-setup-profile: bash-git-prompt bash-extra xdefault-extra
+setup-profile: bash-git-prompt bash-extra xdefault-extra ~/.pryrc
 	echo "$$PROFILE_EXTRA" > ~/.profile-extra
 ifeq ($(CHECK_PROFILE_EXTRA),)
 	echo "$$PROFILE_INLUDE" >> ~/.profile
 endif
+	@$(PRINT_OK)
+
+~/.pryrc:
+	ln -s ~/emacs/.pryrc ~/.pryrc
 	@$(PRINT_OK)
 
 node-tern:
@@ -242,7 +259,9 @@ cpan-dev:
 	${CPAN_INSTALL} Perl::Critic Perl::Tidy
 	@$(PRINT_OK)
 
-bash-git-prompt:
+bash-git-prompt: ~/work/tools/bash-git-prompt/gitprompt.sh
+
+~/work/tools/bash-git-prompt/gitprompt.sh:
 	@mkdir -p ~/tools/other
 # see .bash-extra, where is check for existing dir bash-git-prompt
 	@-git clone --depth 1 https://github.com/magicmonty/bash-git-prompt.git ~/work/tools/bash-git-prompt
@@ -276,3 +295,5 @@ clean:
 	@echo " $(NPM_GLOBAL_PATH)"
 	@echo " ~/.profile-extra"
 	@echo " ~/.bash-extra"
+	@echo " ~/.pryrc"
+	@echo " ~/.spacemacs"
