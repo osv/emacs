@@ -48,6 +48,7 @@ nvm: ~/.nvm/nvm.sh
 				apt-make apt-utils apt-update apt-desktop apt-xmonad docker-compose \
 				editorconfig node install-node exa fish fish-install fish-fisherman \
 				setup-profile node-tern node-lint \
+				developer \
 				cpan cpan-csswatcher cpan-pde cpan-ack cpan-perlcompletion cpan-dev \
 				bash-git-prompt bash-extra haskell xdefault-extra unison clean
 
@@ -55,7 +56,13 @@ nvm: ~/.nvm/nvm.sh
 ~/.nvm/nvm.sh:
 	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
 
-all: setup-profile hipster-tools apt node node-extra node-lint node-tern editorconfig docker-compose cpan
+all: setup-profile hipster-tools apt developer node node-extra node-lint node-tern editorconfig docker-compose cpan
+	@$(PRINT_OK)
+
+developer: apt-update apt-make bash-extra
+	-pip install -U \
+								mycli \
+								pgcli
 	@$(PRINT_OK)
 
 hipster-tools: exa
@@ -83,6 +90,7 @@ apt: apt-update apt-make apt-utils
 
 apt-make:
 	sudo apt-get install -y build-essential \
+				python-pip \
 				curl \
 				wget \
 				autoconf \
@@ -99,8 +107,6 @@ apt-utils: apt-update
 				pwgen \
 				pngquant \
 				silversearcher-ag \
-				mycli \
-				pgcli \
 				source-highlight
 	@$(PRINT_OK)
 
@@ -267,12 +273,14 @@ bash-git-prompt: ~/work/tools/bash-git-prompt/gitprompt.sh
 	@-git clone --depth 1 https://github.com/magicmonty/bash-git-prompt.git ~/work/tools/bash-git-prompt
 	@$(PRINT_OK)
 
-bash-extra:
-	@cp -v .bash-extra ~/
+bash-extra: ~/.bash-extra
 ifeq ($(CHECK_BASH_EXTRA),)
 	echo "$$BASH_INLUDE" >> ~/.bashrc
 endif
 	@$(PRINT_OK)
+
+~/.bash-extra:
+	ln -s ~/emacs/.bash-extra ~/.bash-extra
 
 haskell:
 	curl -sSL https://get.haskellstack.org/ | sh

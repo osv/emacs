@@ -23,3 +23,6 @@ fi
 
 export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
+
+# For mycli, pgcli
+export PROMPT_TOOLKIT_ANSI_COLORS_ONLY=1
