@@ -467,6 +467,20 @@ you should place your code here."
     (progn
       (define-key web-mode-map (kbd "TAB") 'indent-for-tab-command)))
 
+  (defun sql-beautify-region (beg end)
+    "Beautify SQL in region between beg and END.
+Dependency: gem install anbt-sql-formatter"
+    (interactive "r")
+    (save-excursion
+      (shell-command-on-region beg end "anbt-sql-formatter" nil t)))
+  (defun sql-beautify-buffer ()
+    "Beautify SQL in buffer."
+    (interactive)
+    (sql-beautify-region (point-min) (point-max)))
+  (add-hook 'sql-mode-hook '(lambda ()
+                              ;; beautify region or buffer
+                              (local-set-key (kbd "C-c t") 'sql-beautify-region)))
+
   ;; http://blog.binchen.org/posts/how-to-use-flyspell-in-web-mode.html
   (defun web-mode-flyspefll-verify ()
     (let ((f (get-text-property (- (point) 1) 'face)))
