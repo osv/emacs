@@ -469,10 +469,11 @@ you should place your code here."
 
   (defun sql-beautify-region (beg end)
     "Beautify SQL in region between beg and END.
-Dependency: gem install anbt-sql-formatter"
+Dependency:
+npm i -g sql-formatter-cli"
     (interactive "r")
     (save-excursion
-      (shell-command-on-region beg end "anbt-sql-formatter" nil t)))
+      (shell-command-on-region beg end "sql-formatter-cli" nil t)))
   (defun sql-beautify-buffer ()
     "Beautify SQL in buffer."
     (interactive)

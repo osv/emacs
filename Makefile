@@ -213,6 +213,7 @@ node-lint:
 			jsonlint \
 			csslint \
 			js-beautify \
+		  sql-formatter-cli \
 			js-yaml \
 			jscs \
 			jscs-trailing-comma \
