@@ -282,15 +282,19 @@ endif
 
 ~/.bash-extra:
 	ln -s ~/emacs/.bash-extra ~/.bash-extra
+	@$(PRINT_OK)
 
 haskell:
 	curl -sSL https://get.haskellstack.org/ | sh
 
-xdefault-extra:
-	@cp -v .Xdefaults-extra ~/
+xdefault-extra: ~/.Xdefaults-extra
 ifeq ($(CHECK_XDEFAULTS_EXTRA),)
 	echo "$$XDEFAULTS_INLUDE" >> ~/.Xdefaults
 endif
+	@$(PRINT_OK)
+
+~/.Xdefaults-extra:
+	ln -s ~/emacs/.Xdefaults-extra ~/.Xdefaults-extra
 	@$(PRINT_OK)
 
 unison:
