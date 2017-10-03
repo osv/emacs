@@ -1,6 +1,6 @@
-function nvm                                                                                                                                                   
-  bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv                                                                                                       
-end                                                                                                                                                            
+function nvm
+  bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
+end
 
 # git status
 set -g __fish_git_prompt_show_informative_status 1
