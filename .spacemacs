@@ -73,6 +73,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     diredfl
      wgrep
      nginx-mode
      crontab-mode
@@ -329,6 +330,8 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+  (diredfl-global-mode +1)
 
   ;; Navigate windows with M-<arrows>
   (windmove-default-keybindings 'meta)
