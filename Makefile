@@ -85,7 +85,12 @@ spacemacs: ~/.spacemacs
 	git clone --depth 1 https://github.com/syl20bnr/spacemacs ~/.emacs.d
 	@$(PRINT_OK)
 
-apt: apt-update apt-make apt-utils
+apt: apt-lists apt-update apt-make apt-utils
+	@$(PRINT_OK)
+
+apt-lists:
+	sudo add-apt-repository --yes ppa:nomacs/stable
+	sudo add-apt-repository --yes ppa:nilarimogard/webupd8
 	@$(PRINT_OK)
 
 apt-make:
@@ -127,6 +132,8 @@ apt-desktop: apt-update
 				kbdd \
 				eog \
 				ristretto \
+				nomacs \
+				rosa-media-player \
 				xscreensaver
 	@$(PRINT_OK)
 
