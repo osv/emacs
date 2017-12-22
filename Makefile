@@ -187,12 +187,16 @@ fish-fisherman: ~/.config/fish/functions/fisher.fish
 	-fish -c 'fisher edc/bass docker-completion brgmnn/fish-docker-compose last_job_id humanize_duration'
 	@$(PRINT_OK)
 
-setup-profile: bash-git-prompt bash-extra xdefault-extra ~/.pryrc
+setup-profile: bash-git-prompt bash-extra xdefault-extra ~/.pryrc ~/bin/create-webm
 	echo "$$PROFILE_EXTRA" > ~/.profile-extra
 ifeq ($(CHECK_PROFILE_EXTRA),)
 	echo "$$PROFILE_INLUDE" >> ~/.profile
 endif
 	@$(PRINT_OK)
+
+~/bin/create-webm:
+	@mkdir -p ~/bin
+	ln -s ~/emacs/tools/webm/create-webm ~/bin/create-webm
 
 ~/.pryrc:
 	ln -s ~/emacs/.pryrc ~/.pryrc

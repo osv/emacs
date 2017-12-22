@@ -1,0 +1,244 @@
+#!/bin/bash
+# TODO http://wiki.webmproject.org/ffmpeg/vp9-encoding-guide
+# Inspired by https://github.com/pituz/webm-thread/blob/master/tools/WebMaster
+
+# Notes:
+# These are the defaults when using ffmpeg with libvpx-vp9 1.6.0:
+# profile=0
+# quality=good (deadline=1000000)
+# speed=1 (-cpu-used = -speed)
+# frame-parallel=1
+# tile-columns=6
+# row-mt=0
+# auto-alt-ref=1
+# lag-in-frames=25
+# aq-mode=0
+# kf_max_dist=128 (-g)
+
+DEFAULT_AUDIO_BITRAITE="32k"
+DEFAULT_VIDEO_BITRAITE="2M"
+DEFAULT_CONSTANT_QUALITY="30"
+DEFAULT_VIDEO_FILTER="hqdn3d=4.0:3.0:6.0:4.5,scale=h=1080:force_original_aspect_ratio=decrease"
+DEFAULT_SPEED="1"
+
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+blue() {
+    printf "\e[34m$@\e[0m\n"
+}
+
+green() {
+    printf "\e[32m$@\e[0m\n"
+}
+
+remove_color() {
+    echo $@ | sed -r "s/[[:cntrl:]]\[[0-9]{1,3}m//g"
+}
+
+OUTPUT_PREFIX=""
+
+print_help() {
+    param() {
+        local param=$1
+        local desc=$2
+        local default=$3
+        param=$(printf '%-13s' "$param")
+        echo -n "  ${bold}$param${normal} "
+        echo -n $desc
+        if [[ -z $default ]]; then
+            echo
+        else
+            echo ", default ${bold}$default${normal}"
+        fi
+    }
+
+    echo 'Webm Wishmaster'
+    param '-i file' 'Input video file'
+    param '-vb int' 'Bitrate of video' $DEFAULT_VIDEO_BITRAITE
+    param '-ab int' 'Bitrate of audo' $DEFAULT_AUDIO_BITRAITE
+    param '-s 0..8' 'Speed. Low - better', $DEFAULT_SPEED
+    param '-1, -no-2pass' "Don't run 2 pass, use constant quality, see -cq"
+    param '-cq int, -crf int' "Constant quality, only with -no-2pass. 15–35, lower - better, 31 ok for 1080p" $DEFAULT_CONSTANT_QUALITY
+    param '-vf int' "Custom video filter" $DEFAULT_VIDEO_FILTER
+    param '-t int' "Duration"
+    param '-y' 'Dont ask for overwrite'
+    param '-d' 'Debug ffmpeg (-loglevel debug)'
+    param '-o file' "Output file, default is file from \"-i\" with \".webm\" extention"
+}
+
+get_ffmpeg_cmd() {
+    local pass=$1
+    local video_bitraite_param="-b:v ${VIDEO_BITRAITE}"
+    local pass_params="\n"
+    local pass_log_file=$(remove_color ${OUTPUT_VIDEO}.2pass.log)
+    case $pass in
+        1)
+            pass_params="-pass 1 -speed 4 -an -passlogfile \"$pass_log_file\""
+            output_video="-y -f null -"
+            ;;
+        2)
+            pass_params="-pass 2 -speed ${SPEED} -passlogfile \"$pass_log_file\""
+            output_video="${OVERRIDE_MAYBE} \"${OUTPUT_VIDEO}\""
+            ;;
+        *)
+            output_video="${OVERRIDE_MAYBE} \"${OUTPUT_VIDEO}\""
+            pass_params="-crf ${CONSTANT_QUALITY}"
+            # https://trac.ffmpeg.org/wiki/Encode/VP9#constantq
+            video_bitraite_param="-b:v 0"
+            ;;
+    esac
+
+    cat <<EOF
+ffmpeg -i "${INPUT_VIDEO}"
+       -hide_banner ${LOG_DEBUG_MAYBE} ${VIDEO_DURATION_MAYBE}
+       -c:v vp9     $video_bitraite_param
+       -c:a libopus -b:a ${AUDIO_BITRAITE}
+       -r 30 -g 128
+       -vf "${VIDEO_FILTER}"
+       ${pass_params}
+       ${output_video}
+EOF
+}
+
+## main
+
+if [[ $# -eq 0 ]] ; then
+    print_help
+    exit 0
+fi
+
+while [[ $# > 0 ]]
+do
+    key="$1"
+
+    case $key in
+        -i)
+            INPUT_VIDEO=$(green "$2")
+            shift
+            ;;
+        -vb)
+            VIDEO_BITRAITE=$(green "$2")
+            OUTPUT_PREFIX="${OUTPUT_PREFIX}-vb$2"
+            shift
+            ;;
+        -ab)
+            AUDIO_BITRAITE=$(green "$2")
+            OUTPUT_PREFIX="${OUTPUT_PREFIX}-ab$2"
+            shift
+            ;;
+        -s|-speed)
+            SPEED=$(green "$2")
+            OUTPUT_PREFIX="${OUTPUT_PREFIX}-s$2"
+            ;;
+        -1|--no-2pass)
+            RUN_2_PASSES="no"
+            OUTPUT_PREFIX="${OUTPUT_PREFIX}-no2pass"
+            ;;
+        -cq|-crf)
+            CONSTANT_QUALITY=$(green "$2")
+            OUTPUT_PREFIX="${OUTPUT_PREFIX}-cq$2"
+            shift
+            ;;
+        -vf)
+            VIDEO_FILTER=$(green "$2")
+            OUTPUT_PREFIX="${OUTPUT_PREFIX}-vf$2"
+            ;;
+        -t)
+            duration=$(green "$2")
+            VIDEO_DURATION_MAYBE="-t $duration"
+            OUTPUT_PREFIX="${OUTPUT_PREFIX}-t$2"
+            shift
+            ;;
+        -y)
+            OVERRIDE_MAYBE=$(green "-y")
+            ;;
+        -d)
+            LOG_DEBUG_MAYBE=$(green '-loglevel debug')
+            ;;
+        -o)
+            OUTPUT_VIDEO=$(blue "$2")
+            shift
+            ;;
+        -h|--help)
+            print_help
+            exit 0
+            ;;
+        *)
+            ;;
+    esac
+    shift # past argument or value
+done
+
+if [[ -z $INPUT_VIDEO ]]; then
+    echo 'Input video "-i" is required.'
+    exit 1
+fi
+
+AUDIO_BITRAITE="${AUDIO_BITRAITE:-${DEFAULT_AUDIO_BITRAITE}}"
+VIDEO_BITRAITE="${VIDEO_BITRAITE:-${DEFAULT_VIDEO_BITRAITE}}"
+CONSTANT_QUALITY="${CONSTANT_QUALITY:-${DEFAULT_CONSTANT_QUALITY}}"
+VIDEO_FILTER="${VIDEO_FILTER:-${DEFAULT_VIDEO_FILTER}}"
+OUTPUT_VIDEO="${OUTPUT_VIDEO:-${INPUT_VIDEO}${OUTPUT_PREFIX}.webm}"
+SPEED="${SPEED:-${DEFAULT_SPEED}}"
+
+if [[ "$RUN_2_PASSES" == "no" ]]; then
+    FFMPEG_CMD=$(get_ffmpeg_cmd)
+    CMD_PREVIEW=$(cat<<EOF
+With constant quality ${CONSTANT_QUALITY} single pass command:
+$FFMPEG_CMD
+EOF
+               )
+    FFMPEG_CMD=$(remove_color "$FFMPEG_CMD")
+else
+    PASS1=$(get_ffmpeg_cmd 1)
+    PASS2=$(get_ffmpeg_cmd 2)
+
+    CMD_PREVIEW=$(cat<<EOF
+Pass #1:
+$PASS1
+
+Pass #2:
+$PASS2
+EOF
+               )
+    PASS1=$(remove_color "$PASS1")
+    PASS2=$(remove_color "$PASS2")
+    FFMPEG_CMD=$(cat<<EOF
+echo '=== Pass #1 ======================================' &&
+$PASS1 &&
+
+echo '====Pass #2 ======================================' &&
+$PASS2
+EOF
+              )
+fi
+
+# TODO: add edit FFMPEG_CMD
+
+cat <<EOF
+Run ffmpeg?
+
+Planned next command(s):
+
+${CMD_PREVIEW}
+
+Press ENTER to continue or Ctrl+C to stop or type something to edit command
+EOF
+
+read want_edit_cmd
+
+echo ">> ${want_edit_cmd}"
+if [ -n "$want_edit_cmd" ]; then
+    cmd_file_name=$(tempfile)
+    echo  file $cmd_file_name
+    echo "$FFMPEG_CMD" > $cmd_file_name
+    $EDITOR $cmd_file_name
+    FFMPEG_CMD=$(cat $cmd_file_name)
+    rm $cmd_file_name
+    echo $(green "Edited command:<<EOS")
+    echo "${bold}$FFMPEG_CMD${normal}"
+    echo $(green "EOS")
+fi
+
+eval "$FFMPEG_CMD"
