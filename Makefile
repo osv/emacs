@@ -89,7 +89,10 @@ apt: apt-lists apt-update apt-make apt-utils
 	@$(PRINT_OK)
 
 apt-lists:
+# imageviewer
 	sudo add-apt-repository --yes ppa:nomacs/stable
+
+# rosa-media-player
 	sudo add-apt-repository --yes ppa:nilarimogard/webupd8
 	@$(PRINT_OK)
 
