@@ -31,6 +31,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     go
+     csv
      php
      elm
      purescript
@@ -73,6 +75,8 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     ;; prog-fill require emacs 25.1
+     feature-mode
      color-theme-sanityinc-tomorrow
      diredfl
      wgrep
@@ -425,8 +429,8 @@ you should place your code here."
 
   (global-set-key (kbd "C-c C-<left>")  'hs-hide-block)
   (global-set-key (kbd "C-c C-<right>") 'hs-show-block)
-  (global-set-key (kbd "C-c C-<up>") 'hs-hide-level) 
-  (global-set-key (kbd "C-c C-<down>") 'hs-toggle-hiding) 
+  (global-set-key (kbd "C-c C-<up>") 'hs-hide-level)
+  (global-set-key (kbd "C-c C-<down>") 'hs-toggle-hiding)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; dired
@@ -444,7 +448,6 @@ you should place your code here."
 
   ;;                                       ; highlight executable files, but not directories
   ;; (dired-rainbow-define-chmod executable-unix "green" "-.*x.*")
-
   (global-set-key [C-f5] 'dired-jump)
   (global-set-key (kbd "C-c p C-s") 'helm-projectile-ag)
 
@@ -558,9 +561,9 @@ npm i -g sql-formatter-cli"
 
   (add-hook 'flycheck-mode-hook #'my/use-tslint-from-node-modules)
 
-  ;; http://chopmo.blogspot.com/2008/09/quickly-jumping-to-symbols.html 
+  ;; http://chopmo.blogspot.com/2008/09/quickly-jumping-to-symbols.html
   (defun ido-goto-symbol ()
-    "Will update the imenu index and then use ido to select a 
+    "Will update the imenu index and then use ido to select a
    symbol to navigate to"
     (interactive)
     (imenu--make-index-alist)
