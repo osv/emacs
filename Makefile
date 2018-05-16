@@ -1,32 +1,32 @@
 include vars.mk
 
 help:
-	@echo "                Bootstrap Emacs environment"
+	@echo "								 Bootstrap Emacs environment"
 	@echo "================================================================"
 	@echo "Usage:"
 	@echo
-	@echo "     make nvm"
-	@echo "     make all"
+	@echo "			make nvm"
+	@echo "			make all"
 	@echo "or"
-	@echo	
-	@echo "     make setup-profile apt apt-desktop node node-lint node-extra node-tern cpan editorconfig"
+	@echo
+	@echo "			make setup-profile apt apt-desktop node node-lint node-extra node-tern cpan editorconfig"
 	@echo
 	@echo "and additionally you can:"
 	@echo
-	@echo "    make apt-desktop apt-xmonad spacemacs"
+	@echo "		 make apt-desktop apt-xmonad spacemacs"
 	@echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-	@echo "  setup-profile - bash-git-prompt, bash profile, .profile-extra, .Xdefault-Extra"
-	@echo "  spacemacs - setup spacemacs dotfile and install spacemacs"
-	@echo "  hipster-tools - exa"
-	@echo "  fish - fish shell"
-	@echo "  apt - build-essential, pwgen, screen, iptraf, source-highlight"
-	@echo "  node - nvm install and use node.js $(NODE_VERSION)"
-	@echo "  node-lint - varios lint tools that required by flycheck-mode.el"
-	@echo "  node-extra - tern.js gulp, bower, mongohacker, etc"
-	@echo "  node-tern - some tern.js plugins"
-	@echo "  cpan - csswatcher ack perlcompletion perltidy"
-	@echo "  unison"
-	@echo "  editorconfig - download and install libeditorconfig from source"
+	@echo "	 setup-profile - bash-git-prompt, bash profile, .profile-extra, .Xdefault-Extra"
+	@echo "	 spacemacs - setup spacemacs dotfile and install spacemacs"
+	@echo "	 hipster-tools - exa"
+	@echo "	 fish - fish shell"
+	@echo "	 apt - build-essential, pwgen, screen, iptraf, source-highlight"
+	@echo "	 node - nvm install and use node.js $(NODE_VERSION)"
+	@echo "	 node-lint - varios lint tools that required by flycheck-mode.el"
+	@echo "	 node-extra - tern.js gulp, bower, mongohacker, etc"
+	@echo "	 node-tern - some tern.js plugins"
+	@echo "	 cpan - csswatcher ack perlcompletion perltidy"
+	@echo "	 unison"
+	@echo "	 editorconfig - download and install libeditorconfig from source"
 	@echo
 	@echo 'For update yout profile type "make setup-profile"'
 	@echo
@@ -34,7 +34,7 @@ help:
 
 info:
 	@echo "Cheatsheat:"
-	@echo "iotop -aoP    Show accumulated stat"
+	@echo "iotop -aoP		 Show accumulated stat"
 	@echo " docker --net=host problem. See https://github.com/docker/docker/issues/13914 "
 
 nvm: ~/.nvm/nvm.sh
@@ -75,10 +75,10 @@ spacemacs: ~/.spacemacs
 ~/.spacemacs:
 	@echo "Make copy of your ~/.emacs.d and ~/.emacs"
 	@while [ -e ~/.emacs ]; do \
-	    read -p "File ~/.emacs still exist. Backup it and press enter to continue " r; \
+			read -p "File ~/.emacs still exist. Backup it and press enter to continue " r; \
 	done
 	@while [ -e ~/.emacs.d ]; do \
-	    read -p "File ~/.emacs.d still exist. Backup it and press enter to continue " r; \
+			read -p "File ~/.emacs.d still exist. Backup it and press enter to continue " r; \
 	done
 
 	ln -s ~/emacs/.spacemacs ~/.spacemacs
@@ -154,7 +154,7 @@ docker-compose:
 editorconfig:
 	@echo "*********************************************"
 	@echo " Installing libeditorconfig from"
-	@echo "    https://github.com/editorconfig/editorconfig-core-c"
+	@echo "		 https://github.com/editorconfig/editorconfig-core-c"
 	@echo "*********************************************"
 	@rm -rf /tmp/editorconfig-build
 	git clone https://github.com/editorconfig/editorconfig-core-c /tmp/editorconfig-build
@@ -227,7 +227,7 @@ node-lint:
 			jsonlint \
 			csslint \
 			js-beautify \
-		  sql-formatter-cli \
+			sql-formatter-cli \
 			js-yaml \
 			jscs \
 			jscs-trailing-comma \
