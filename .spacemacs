@@ -75,7 +75,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
-     ;; prog-fill require emacs 25.1
+     ;; prog-fill, magit-todos require emacs 25.1
      feature-mode
      color-theme-sanityinc-tomorrow
      diredfl
@@ -90,6 +90,7 @@ values."
      project-shells
      project-explorer
      egg
+     prettier-js
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()

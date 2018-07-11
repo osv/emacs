@@ -227,6 +227,7 @@ node-lint:
 			jsonlint \
 			csslint \
 			js-beautify \
+			prettier \
 			sql-formatter-cli \
 			js-yaml \
 			jscs \
