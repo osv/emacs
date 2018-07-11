@@ -108,8 +108,10 @@ apt-make:
 	@$(PRINT_OK)
 
 apt-utils: apt-update
-	sudo apt-get install -y iptraf \
+	sudo apt-get install -y \
+				iptraf \								# Internet activity util
 				iotop \
+				nethogs \								# Internet activity monitor
 				dstat \
 				screen \
 				pwgen \
