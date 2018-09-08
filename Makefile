@@ -102,7 +102,10 @@ apt-make:
 				curl \
 				wget \
 				autoconf \
-				cmake
+				cmake \
+				libpq-dev \
+				libmysqlclient-dev
+
 # dependencies for editorconf
 	sudo apt-get install -y libpcre3 libpcre3-dev
 	@$(PRINT_OK)
