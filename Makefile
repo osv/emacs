@@ -9,7 +9,7 @@ help:
 	@echo "			make all"
 	@echo "or"
 	@echo
-	@echo "			make setup-profile apt apt-desktop node node-lint node-extra node-tern cpan editorconfig"
+	@echo "			make setup-profile hipster-tools apt developer node node-extra node-lint node-tern editorconfig docker-compose cpan"
 	@echo
 	@echo "and additionally you can:"
 	@echo
@@ -112,9 +112,9 @@ apt-make:
 
 apt-utils: apt-update
 	sudo apt-get install -y \
-				iptraf \								# Internet activity util
+				iptraf \
 				iotop \
-				nethogs \								# Internet activity monitor
+				nethogs \
 				dstat \
 				screen \
 				pwgen \
