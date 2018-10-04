@@ -81,7 +81,6 @@ values."
      diredfl
      wgrep
      nginx-mode
-     crontab-mode
      editorconfig
      rainbow-mode
      string-inflection
