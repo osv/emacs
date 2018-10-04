@@ -53,7 +53,7 @@ nvm: ~/.nvm/nvm.sh
 				bash-git-prompt bash-extra haskell xdefault-extra unison clean
 
 # nvm install if not exist dir
-~/.nvm/nvm.sh:
+~/.nvm/nvm.sh: apt-make
 	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
 
 all: setup-profile hipster-tools apt developer node node-extra node-lint node-tern editorconfig docker-compose cpan
