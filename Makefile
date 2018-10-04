@@ -123,7 +123,7 @@ apt-utils: apt-update
 				source-highlight
 	@$(PRINT_OK)
 
-apt-update:
+apt-update: apt-lists
 	sudo apt-get update
 	@$(PRINT_OK)
 
@@ -141,7 +141,8 @@ apt-desktop: apt-update
 				eog \
 				ristretto \
 				nomacs \
-				rosa-media-player \
+				pavcontrol \
+				stalonetray \
 				xscreensaver
 	@$(PRINT_OK)
 
