@@ -141,7 +141,7 @@ apt-desktop: apt-update
 				eog \
 				ristretto \
 				nomacs \
-				pavcontrol \
+				pavucontrol \
 				stalonetray \
 				xscreensaver
 	@$(PRINT_OK)
