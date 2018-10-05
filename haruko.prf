@@ -1,0 +1,59 @@
+# Roots of the synchronization
+# used unison: 2.40.65
+root = ./
+root = ssh://a1007@ononos.tk//home/a1007/syncgate
+#servercmd = ~/bin/unison
+
+    # Paths to synchronize
+#    path = sync
+    path = bin
+#    path = photo
+    path = .awesomerc
+    path = .awesome
+    path = .screenrc
+    path = .xsessionrc
+# emacs
+    path = emacs
+    path = .emacs
+    path = .fonts
+    path = org
+    path = News
+    path = diary
+    path = .bbdb.gpg
+    path = .gnus.el
+    path = .newsrc
+    path = .newsrc.eld
+    path = .newsrc-dribble
+
+    path = books
+
+    ignore = Name */.git
+
+    path = .tkabber
+
+# xmonad
+    path = .xmonad
+    ignore = Name xmonad-*
+    ignore = Name xmonad.hi
+    ignore = Name xmonad.hs
+
+    ignore = Name history
+
+    # Some regexps specifying names and paths to ignore
+    ignore = Name *~
+    ignore = Name *.core
+    # Emacs gnus nnimap cache
+    ignore = Name .*~
+    ignore = Name \#*
+    ignore = Name .\#*
+
+    ignore = Name *.o
+    ignore = Name *.tmp
+    ignore = Name *.svn
+    ignore = Name *.pk3
+
+    # Use this command for displaying diffs
+    diff = diff -y -W 79 --suppress-common-lines
+
+    # Log actions to the terminal
+    log = true

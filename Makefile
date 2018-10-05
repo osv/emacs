@@ -318,7 +318,11 @@ endif
 	ln -s ~/emacs/.Xdefaults-extra ~/.Xdefaults-extra
 	@$(PRINT_OK)
 
-unison:
+~/.unison/haruko.prf:
+	ln -s ~/emacs/haruko.prf ~/.unison/haruko.prf
+	@$(PRINT_OK)
+
+unison: ~/.unison/haruko.prf
 	wget -O /tmp/unison-gtk_2.40.102-2ubuntu1_amd64.deb http://mirrors.kernel.org/ubuntu/pool/universe/u/unison/unison-gtk_2.40.102-2ubuntu1_amd64.deb
 	sudo dpkg --install /tmp/unison-gtk_2.40.102-2ubuntu1_amd64.deb
 	@$(PRINT_OK)
