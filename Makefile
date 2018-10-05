@@ -319,6 +319,7 @@ endif
 	@$(PRINT_OK)
 
 ~/.unison/haruko.prf:
+	mkdir -p ~/emacs
 	ln -s ~/emacs/haruko.prf ~/.unison/haruko.prf
 	@$(PRINT_OK)
 
