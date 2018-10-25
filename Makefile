@@ -230,6 +230,7 @@ node-tern:
 
 node-lint:
 	$(NPM) install -g jshint \
+			import-js \
 			jsonlint \
 			csslint \
 			js-beautify \
