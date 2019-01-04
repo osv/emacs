@@ -327,6 +327,7 @@ endif
 unison: ~/.unison/haruko.prf
 	wget -O /tmp/unison-gtk_2.40.102-2ubuntu1_amd64.deb http://mirrors.kernel.org/ubuntu/pool/universe/u/unison/unison-gtk_2.40.102-2ubuntu1_amd64.deb
 	sudo dpkg --install /tmp/unison-gtk_2.40.102-2ubuntu1_amd64.deb
+	sudo apt-mark hold unison-gtk
 	@$(PRINT_OK)
 
 clean:
