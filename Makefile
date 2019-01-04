@@ -143,6 +143,7 @@ apt-desktop: apt-update
 				nomacs \
 				pavucontrol \
 				stalonetray \
+				mysql-workbench \
 				xscreensaver
 	@$(PRINT_OK)
 
