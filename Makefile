@@ -36,6 +36,8 @@ info:
 	@echo "Cheatsheat:"
 	@echo "iotop -aoP		 Show accumulated stat"
 	@echo " docker --net=host problem. See https://github.com/docker/docker/issues/13914 "
+	@echo " -- First time install --"
+	@echo "1. 'apt-get install zram-config' if low memory"
 
 nvm: ~/.nvm/nvm.sh
 	@$(PRINT_OK)
