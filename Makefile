@@ -156,7 +156,7 @@ apt-xmonad:
 	@$(PRINT_OK)
 
 docker-compose:
-	curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` | sudo tee /usr/local/bin/docker-compose > /dev/null
+	curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` | sudo tee /usr/local/bin/docker-compose > /dev/null
 	sudo chmod +x /usr/local/bin/docker-compose
 	@$(PRINT_OK)
 
