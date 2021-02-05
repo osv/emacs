@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     sml
      go
      csv
      php
@@ -480,7 +481,7 @@ Dependency:
 npm i -g sql-formatter-cli"
     (interactive "r")
     (save-excursion
-      (shell-command-on-region beg end "sql-formatter-cli" nil t)))
+      (shell-command-on-region beg end "sql-formatter" nil t)))
   (defun sql-beautify-buffer ()
     "Beautify SQL in buffer."
     (interactive)

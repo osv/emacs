@@ -249,14 +249,11 @@ node-lint:
 
 # other fix-gaze
 node-extra:
-	$(NPM) install -g bower \
-			@angular/cli \
-			grunt-cli \
-			gulp \
+	$(NPM) install -g np \
+      sql-formatter \
 			http-server \
 			mongo-hacker \
 			nodemon \
-			flow-bin \
 			tern \
 			elm \
 			elm-oracle
