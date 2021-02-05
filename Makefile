@@ -9,7 +9,7 @@ help:
 	@echo "			make all"
 	@echo "or"
 	@echo
-	@echo "			make setup-profile hipster-tools apt developer node node-extra node-lint node-tern editorconfig docker-compose cpan"
+	@echo "			make setup-profile hipster-tools apt developer node node-extra node-lint node-tern editorconfig docker-compose"
 	@echo
 	@echo "and additionally you can:"
 	@echo
@@ -58,7 +58,7 @@ nvm: ~/.nvm/nvm.sh
 ~/.nvm/nvm.sh: apt-make
 	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
 
-all: setup-profile hipster-tools apt developer node node-extra node-lint node-tern editorconfig docker-compose cpan
+all: setup-profile hipster-tools apt developer node node-extra node-lint node-tern editorconfig docker-compose
 	@$(PRINT_OK)
 
 developer: apt-update apt-make bash-extra
@@ -146,7 +146,8 @@ apt-desktop: apt-update ms-fonts
 				pavucontrol \
 				stalonetray \
 				mysql-workbench \
-				xscreensaver
+				xscreensaver \
+				libclang-dev
 	@$(PRINT_OK)
 
 apt-xmonad:
