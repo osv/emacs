@@ -129,7 +129,7 @@ apt-update: apt-lists
 	sudo apt-get update
 	@$(PRINT_OK)
 
-apt-desktop: apt-update
+apt-desktop: apt-update ms-fonts
 	sudo apt-get install -y scrot \
 				perl-doc \
 				xfonts-terminus \
@@ -328,6 +328,10 @@ unison: ~/.unison/haruko.prf
 	wget -O /tmp/unison-gtk_2.40.102-2ubuntu1_amd64.deb http://mirrors.kernel.org/ubuntu/pool/universe/u/unison/unison-gtk_2.40.102-2ubuntu1_amd64.deb
 	sudo dpkg --install /tmp/unison-gtk_2.40.102-2ubuntu1_amd64.deb
 	sudo apt-mark hold unison-gtk
+	@$(PRINT_OK)
+
+ms-fonts:
+	sudo apt-get --reinstall install ttf-mscorefonts-installer
 	@$(PRINT_OK)
 
 clean:
