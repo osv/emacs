@@ -78,6 +78,7 @@ values."
      diredfl
      wgrep
      nginx-mode
+     coffee-mode
      editorconfig
      rainbow-mode
      string-inflection
