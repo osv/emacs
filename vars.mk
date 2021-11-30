@@ -1,5 +1,5 @@
 FISH_VERSION          = master # 2.5.0
-NODE_VERSION          = v6.9.1
+NODE_VERSION          = v12.20.1
 MAKE_JOBS             = 3 # fore make from sources
 EXA_LS_VERSION        = 0.4.0
 CHECK_PROFILE_EXTRA   = $(shell grep 'HOME/.profile-extra' ~/.profile)
