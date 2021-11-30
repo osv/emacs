@@ -334,6 +334,11 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  (defun my-toggle-show-trailing-whitespace ()
+    "Toggle show-trailing-whitespace between t and nil"
+    (interactive)
+    (setq show-trailing-whitespace (not show-trailing-whitespace)))
+
   (diredfl-global-mode +1)
 
   ;; Navigate windows with M-<arrows>
@@ -547,17 +552,17 @@ npm i -g sql-formatter-cli"
 
   (global-set-key (kbd "M-p") 'flyspell-check-previous-highlighted-word)
 
-  (defun my/use-tslint-from-node-modules ()
-    (let* ((root (locate-dominating-file
-                  (or (buffer-file-name) default-directory)
-                  "node_modules"))
-           (tslint (and root
-                        (expand-file-name "node_modules/.bin/tslint"
-                                          root))))
-      (when (and tslint (file-executable-p tslint))
-        (setq-local flycheck-typescript-tslint-executable tslint))))
+  ;; (defun my/use-tslint-from-node-modules ()
+  ;;   (let* ((root (locate-dominating-file
+  ;;                 (or (buffer-file-name) default-directory)
+  ;;                 "node_modules"))
+  ;;          (tslint (and root
+  ;;                       (expand-file-name "node_modules/.bin/tslint"
+  ;;                                         root))))
+  ;;     (when (and tslint (file-executable-p tslint))
+  ;;       (setq-local flycheck-typescript-tslint-executable tslint))))
 
-  (add-hook 'flycheck-mode-hook #'my/use-tslint-from-node-modules)
+  ;; (add-hook 'flycheck-mode-hook #'my/use-tslint-from-node-modules)
 
   ;; http://chopmo.blogspot.com/2008/09/quickly-jumping-to-symbols.html
   (defun ido-goto-symbol ()
