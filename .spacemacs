@@ -72,6 +72,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     pulsar
      ;; prog-fill, magit-todos require emacs 25.1
      feature-mode
      color-theme-sanityinc-tomorrow
@@ -477,6 +478,9 @@ you should place your code here."
     (progn
       (define-key web-mode-map (kbd "TAB") 'indent-for-tab-command)))
 
+  (pulsar-global-mode)
+  (global-hl-line-mode -1)
+
   (defun sql-beautify-region (beg end)
     "Beautify SQL in region between beg and END.
 Dependency:
@@ -627,4 +631,38 @@ npm i -g sql-formatter-cli"
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   ("fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "44c566df0e1dfddc60621711155b1be4665dd3520b290cb354f8270ca57f8788" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
+ '(default-input-method "APL-Z")
+ '(evil-want-Y-yank-to-eol nil)
+ '(helm-autoresize-max-height 100)
+ '(helm-completion-style 'emacs)
+ '(js2-mode-show-parse-errors nil)
+ '(js2-strict-missing-semi-warning nil)
+ '(js2-strict-trailing-comma-warning nil)
+ '(magit-diff-refine-hunk 'all)
+ '(neo-show-updir-line t t)
+ '(neo-vc-integration '(face char) t)
+ '(package-selected-packages
+   '(pulsar sublimity racket-mode helm-gtags ggtags counsel-gtags counsel swiper ivy company-quickhelp auto-indent-mode yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic tree-mode flycheck-irony disaster company-c-headers cmake-mode clang-format irony-eldoc company-irony company-irony-c-headers platformio-mode ob-sml sml-mode thrift stickyfunc-enhance stan-mode srefactor scad-mode qml-mode matlab-mode julia-mode flycheck-indicator theme-magic mood-line auto-rename-tag yaml-mode ws-butler winum which-key wgrep web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tide tagedit string-inflection sql-indent spaceline smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient-helm restart-emacs rbenv rake rainbow-mode rainbow-delimiters pug-mode psci psc-ide project-shells project-explorer prettier-js popwin pomidor phpunit phpcbf php-extras php-auto-yasnippets persp-mode paradox orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file ob-restclient ob-http nginx-mode neotree move-text mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode js2-refactor js-doc intero insert-shebang indent-guide hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-hoogle helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets google-translate golden-ratio go-guru go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flycheck-haskell flycheck-elm flx-ido fish-mode fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu emmet-mode elm-mode elisp-slime-nav egg editorconfig dumb-jump drupal-mode dockerfile-mode docker diredfl dired-rainbow diminish diff-hl define-word csv-mode company-web company-tern company-statistics company-shell company-restclient company-go company-ghci company-ghc company-cabal column-enforce-mode color-theme-sanityinc-tomorrow coffee-mode cmm-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))
+ '(paradox-github-token t)
+ '(psc-ide-add-import-on-completion t t)
+ '(psc-ide-rebuild-on-save nil t)
+ '(pulsar-delay 0.03)
+ '(pulsar-face 'pulsar-cyan)
+ '(pulsar-iterations 8)
+ '(pulsar-pulse t)
+ '(web-mode-script-padding 2)
+ '(web-mode-style-padding 2))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 )
