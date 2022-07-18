@@ -477,6 +477,49 @@ you should place your code here."
       (git-gutter+-toggle-fringe)
       (setq git-gutter+-modified-sign "=")))
 
+  (use-package org-roam
+    :after org
+    :custom
+    (org-roam-directory "~/org/roam")
+    :bind
+    ("C-c r f" . org-roam-node-find)
+    (:map org-mode-map
+          (("C-c r i" . org-roam-node-insert)
+           ("C-c r a" . org-roam-alias-add)))
+    :config
+    (progn
+      (org-roam-db-autosync-mode)
+      (setq org-roam-capture-templates
+            '(("m" "main" plain
+               "%?"
+               :if-new (file+head "main/${slug}.org.gpg"
+                                  "#+title: ${title}\n#+DATE: %T\n#+STARTUP: content\n")
+               :unnarrowed t)
+              ("w" "work" plain
+               "%?"
+               :if-new (file+head "work/${slug}.org.gpg"
+                                  "#+title: ${title}\n#+DATE: %T\n#+filetags: :work: %^G\n#+STARTUP: content\n\n")
+               :unnarrowed t)
+              ("r" "reference" plain "%?"
+               :if-new
+               (file+head "reference/${slug}.org.gpg" "#+title: ${title}\n#+DATE: %T\n")
+               :unnarrowed t)
+              ("a" "article" plain "%?"
+               :if-new
+               (file+head "articles/${slug}.org.gpg" "#+title: ${title}\n#+DATE: %T\n#+filetags: :article:\n\n")
+               :unnarrowed t)))
+      (cl-defmethod org-roam-node-type ((node org-roam-node))
+        "Return the TYPE of NODE."
+        (condition-case nil
+            (file-name-nondirectory
+             (directory-file-name
+              (file-name-directory
+               (file-relative-name (org-roam-node-file node) org-roam-directory))))
+          (error "")))
+      (setq org-roam-node-display-template
+            (concat (propertize "${type:10}" 'face 'org-list-dt) "| ${title:*} " (propertize "|${tags:10}" 'face 'org-tag)))
+      ))
+
   (use-package web-mode
     :config
     (progn
