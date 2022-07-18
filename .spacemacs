@@ -53,7 +53,11 @@ values."
      emacs-lisp
      git
      markdown
-     org
+     (org :variables
+          org-enable-roam-support t
+          org-enable-roam-protocol t
+          org-enable-sticky-header t
+          )
      (spell-checking :variables spell-checking-enable-by-default nil)
      (syntax-checking :variables syntax-checking-use-original-bitmaps nil)
      (typescript :variables
