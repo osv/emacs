@@ -1,11 +1,11 @@
 include vars.mk
 
 help:
-	@echo "								 Bootstrap Emacs environment"
+	@echo "								 Bootstrap Emacs environment in Ubuntu"
 	@echo "================================================================"
 	@echo "Usage:"
 	@echo
-	@echo "			make nvm"
+	@echo "			make nvm # $(NODE_VERSION)"
 	@echo "			make all"
 	@echo "or"
 	@echo
@@ -14,26 +14,16 @@ help:
 	@echo "and additionally you can:"
 	@echo
 	@echo "		 make apt-desktop apt-xmonad spacemacs"
-	@echo "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-	@echo "	 setup-profile - bash-git-prompt, bash profile, .profile-extra, .Xdefault-Extra"
-	@echo "	 spacemacs - setup spacemacs dotfile and install spacemacs"
-	@echo "	 hipster-tools - exa"
-	@echo "	 fish - fish shell"
-	@echo "	 apt - build-essential, pwgen, screen, iptraf, source-highlight"
-	@echo "	 node - nvm install and use node.js $(NODE_VERSION)"
-	@echo "	 node-lint - varios lint tools that required by flycheck-mode.el"
-	@echo "	 node-extra - tern.js gulp, bower, mongohacker, etc"
-	@echo "	 node-tern - some tern.js plugins"
-	@echo "	 cpan - csswatcher ack perlcompletion perltidy"
-	@echo "	 unison"
-	@echo "	 editorconfig - download and install libeditorconfig from source"
+	@echo
+	@echo "Other make targets:"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' Makefile | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 	@echo
 	@echo 'For update yout profile type "make setup-profile"'
 	@echo
 	@echo 'To start emacs from DWM better use ~/emacs/exec-emacs that allow you run tern.js, etc in emacs'
 
-info:
-	@echo "Cheatsheat:"
+info: ## Some useful cheatsheet
+	@echo "Cheatsheet:"
 	@echo "iotop -aoP		 Show accumulated stat"
 	@echo " docker --net=host problem. See https://github.com/docker/docker/issues/13914 "
 	@echo " -- First time install --"
@@ -67,12 +57,12 @@ developer: apt-update apt-make bash-extra
 								pgcli
 	@$(PRINT_OK)
 
-hipster-tools: exa
+hipster-tools: exa ## exa (replacement for ls)
 	@$(PRINT_OK)
 
 # main targers
 
-spacemacs: ~/.spacemacs
+spacemacs: ~/.spacemacs ## setup spacemacs dotfile and install spacemacs
 
 ~/.spacemacs:
 	@echo "Make copy of your ~/.emacs.d and ~/.emacs"
@@ -87,7 +77,7 @@ spacemacs: ~/.spacemacs
 	git clone --depth 1 https://github.com/syl20bnr/spacemacs ~/.emacs.d
 	@$(PRINT_OK)
 
-apt: apt-lists apt-update apt-make apt-utils
+apt: apt-lists apt-update apt-make apt-utils ## build-essential, pwgen, screen, iptraf, source-highlight
 	@$(PRINT_OK)
 
 apt-lists:
@@ -161,7 +151,7 @@ docker-compose:
 	sudo chmod +x /usr/local/bin/docker-compose
 	@$(PRINT_OK)
 
-editorconfig:
+editorconfig: ## download and install libeditorconfig from source
 	@echo "*********************************************"
 	@echo " Installing libeditorconfig from"
 	@echo "		 https://github.com/editorconfig/editorconfig-core-c"
@@ -172,7 +162,7 @@ editorconfig:
 	(cd /tmp/editorconfig-build && cmake . && make -j ${MAKE_JOBS} && sudo make install)
 	@$(PRINT_OK)
 
-node: install-node
+node: install-node ## nvm install and use node.js
 	@$(PRINT_OK)
 
 install-node:
@@ -185,7 +175,7 @@ exa:
 	(cd /tmp && unzip /tmp/exa.zip && sudo cp -v /tmp/exa-linux-x86_64 /usr/local/bin/exa)
 	@$(PRINT_OK)
 
-fish: fish-install fish-fisherman ~/.config/fish
+fish: fish-install fish-fisherman ~/.config/fish ## fish shell
 	@$(PRINT_OK)
 
 ~/.config/fish:
@@ -207,7 +197,7 @@ fish-fisherman: ~/.config/fish/functions/fisher.fish
 	-fish -c 'fisher edc/bass docker-completion brgmnn/fish-docker-compose last_job_id humanize_duration'
 	@$(PRINT_OK)
 
-setup-profile: bash-git-prompt bash-extra xdefault-extra ~/.pryrc ~/bin/create-webm
+setup-profile: bash-git-prompt bash-extra xdefault-extra ~/.pryrc ~/bin/create-webm ## bash-git-prompt, bash profile, .profile-extra, .Xdefault-Extra
 	echo "$$PROFILE_EXTRA" > ~/.profile-extra
 ifeq ($(CHECK_PROFILE_EXTRA),)
 	echo "$$PROFILE_INLUDE" >> ~/.profile
@@ -232,7 +222,7 @@ node-tern:
 			tern-jsx
 	@$(PRINT_OK)
 
-node-lint:
+node-lint: ## varios lint tools that required by flycheck-mode.el
 	$(NPM) install -g jshint \
 			import-js \
 			jsonlint \
@@ -249,7 +239,7 @@ node-lint:
 	@$(PRINT_OK)
 
 # other fix-gaze
-node-extra:
+node-extra: ## tern.js gulp, bower, mongohacker, etc
 	$(NPM) install -g np \
       sql-formatter \
 			http-server \
@@ -261,7 +251,7 @@ node-extra:
 
 	@$(PRINT_OK)
 
-cpan: cpan-csswatcher cpan-ack cpan-perlcompletion cpan-dev
+cpan: cpan-csswatcher cpan-ack cpan-perlcompletion cpan-dev ## csswatcher ack perlcompletion perltidy
 	@$(PRINT_OK)
 
 # etc
@@ -325,7 +315,7 @@ endif
 	ln -s ~/emacs/haruko.prf ~/.unison/haruko.prf
 	@$(PRINT_OK)
 
-unison: ~/.unison/haruko.prf
+unison: ~/.unison/haruko.prf ## fetch unison deb and install
 	wget -O /tmp/unison-gtk_2.40.102-2ubuntu1_amd64.deb http://mirrors.kernel.org/ubuntu/pool/universe/u/unison/unison-gtk_2.40.102-2ubuntu1_amd64.deb
 	sudo dpkg --install /tmp/unison-gtk_2.40.102-2ubuntu1_amd64.deb
 	sudo apt-mark hold unison-gtk
