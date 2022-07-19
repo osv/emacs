@@ -506,7 +506,7 @@ you should place your code here."
                :unnarrowed t)
               ("a" "article" plain "%?"
                :if-new
-               (file+head "articles/${slug}.org.gpg" "#+title: ${title}\n#+DATE: %T\n#+filetags: :article:\n\n")
+               (file+head "article/${slug}.org.gpg" "#+title: ${title}\n#+DATE: %T\n#+filetags: :article: %^G\n\n")
                :unnarrowed t)))
       (cl-defmethod org-roam-node-type ((node org-roam-node))
         "Return the TYPE of NODE."
